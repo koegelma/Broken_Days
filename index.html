@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Template.css">
+  <script src="Fudge/FudgeCore.js"></script>
+  <script src="FudgeStory/FudgeStory.js"></script>
+  <script src="./Build/Template.js"></script>
+  <title>Broken Days</title>
+  <splash src="Images/Splash.png" />
+</head>
+
+<body>
+  <scene>
+    <canvas></canvas>
+    <speech>
+      <name>
+        <!-- The name of the character speaking - [Strg] + [#] -> auskommentieren-->
+      </name>
+      <content>
+        <!-- The text the character says -->
+      </content>
+    </speech>
+
+    <dialog type="text">
+      <!-- The content of a page of text for reading -->
+    </dialog>
+
+    <dialog type="inventory">
+      <ul></ul>
+    </dialog>
+
+    
+    // Scale Fill
+    <div type="interface">
+      <input id="scaleForOlorin" type="text" value="Olorin" disabled>
+      // für value der skala; füllung 
+      <meter id="olorinMeter" name="olorinScore" min="0" max="100" disabled></meter>
+    </div>
+    // Scale Fill
+   
+  </scene>
+
+  <dialog type="splash" open>
+    <img id="FudgeStoryLogo" theme="dark" /> <!-- use "light" or "dark" -->
+    <p>
+      <!-- Design your splash screen here. Reposition and rescale the logo above, but do not remove. -->
+    </p>
+  </dialog>
+  
+</body>
+
+</html>
