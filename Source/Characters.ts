@@ -19,7 +19,8 @@ namespace Broken_Days {
                 sad: "./Images/Characters/Main/Sad.png",
                 shoked: "./Images/Characters/Main/Shoked.png",
                 surprised: "./Images/Characters/Main/Surprised.png",
-                tired: "./Images/Characters/Main/Tired.png"
+                tired: "./Images/Characters/Main/Tired.png",
+                asleep: "./Images/Characters/Main/Asleep.png"
             }
         }
         /* ,

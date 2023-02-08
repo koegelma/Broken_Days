@@ -81,14 +81,14 @@ namespace Broken_Days {
     };
   }
 
-  export async function fadeScene(): Promise<void> {
+  export async function fadeScene(_duration: number = 1): Promise<void> {
     ƒS.Location.show(locations.blackscreen);
     ƒS.Character.hideAll();
     ƒS.Speech.hide();
-    await ƒS.update(1);
+    await ƒS.update(_duration);
   }
 
-  export async function hndLocationDecision(_scene: string): ƒS.SceneReturn {
+  export async function trainTransition(): Promise<void> {
     await fadeScene();
     await ƒS.Location.show(locations.train);
     await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(75, 100));
@@ -97,10 +97,11 @@ namespace Broken_Days {
     //ƒS.Character.animate(characters.mainCharacter, characters.mainCharacter.pose.neutral, getTrainAnimation());
     await ƒS.Progress.delay(5);
     await fadeScene();
-    return _scene;
+    /* console.log(_scene);
+    return _scene; */
   }
 
-  export async function hndNextLocation(): ƒS.SceneReturn {
+  export async function hndNextLocation(): Promise<string> {
     if (dataForSave.DayTime != DayTime.EVENING) {
       await ƒS.Speech.tell(characters.mainCharacter, "Ich sollte meine Suche jetzt besser fortsetzen.");
       UpdateDayTime();
@@ -108,7 +109,7 @@ namespace Broken_Days {
       return "LocationDecision";
     }
     // Evening
-    await ƒS.Speech.tell(characters.mainCharacter, "Es ist schon spät... Ich sollte jetzt besser nach Hause gehen.");
+    await ƒS.Speech.tell(characters.mainCharacter, "Es ist schon so spät... Ich sollte jetzt besser nach Hause gehen und morgen weiter suchen.");
     UpdateDayTime();
     await fadeScene();
     return "EndDay";
@@ -205,9 +206,11 @@ namespace Broken_Days {
       //{ scene: Inventory_Test, name: "Inventory_Test" }
       //{id: "", scene: Scene, name: "Scene" , next:""}, --> next mit id ansprechen
       { id: "LocationDecision", scene: LocationDecision, name: "LocationDecision" },
-      { id: "Neighbour", scene: Neighbour, name: "Neighbour" },
-      { id: "School", scene: School, name: "School" },
-      { id: "Friend", scene: Friend, name: "Friend" }
+      { id: "Neighbour", scene: Neighbour, name: "Neighbour"},
+      { id: "School", scene: School, name: "School"},
+      { id: "Friend", scene: Friend, name: "Friend"},
+      { id: "EndDay", scene: EndDay, name: "EndDay"},
+      { id: "NewDay", scene: NewDay, name: "NewDay"}
     ];
 
     let uiElement: HTMLElement = document.querySelector("[type=interface]");

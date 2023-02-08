@@ -38,7 +38,7 @@ namespace Broken_Days {
             },
             evening: {
                 name: "CityEvening",
-                background: "./Images/Backgrounds/City_Evening.png"
+                background: "./Images/Backgrounds/City_Night.png"
             }
         },
         // neighbour living room

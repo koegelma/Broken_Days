@@ -15,7 +15,7 @@ namespace Broken_Days {
         await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
         await ƒS.update(1);
-        await ƒS.Speech.tell(characters.mainCharacter, "Wo soll ich als nächstes suchen?");
+        await ƒS.Speech.tell(characters.mainCharacter, "Mhh, es ist schon Mittag. Wo soll ich als nächstes suchen?");
     }
 
     async function EveningRoutine(): Promise<void> {
@@ -64,20 +64,23 @@ namespace Broken_Days {
                 await ƒS.Speech.tell(characters.mainCharacter, "Ich gehe zu meiner Nachbarin.");
                 //await fadeScene();
                 //return "Neighbour";
-                await hndLocationDecision("Neighbour");
-                break;
+                await trainTransition();
+                return "Neighbour";
+
             case nextLocationAnswers.iSaySchool:
                 await ƒS.Speech.tell(characters.mainCharacter, "Ich gehe zur Schule.");
                 //await fadeScene();
                 //return "School";
-                await hndLocationDecision("School");
-                break;
+                await trainTransition();
+                return "School";
+
             case nextLocationAnswers.iSayFriend:
                 await ƒS.Speech.tell(characters.mainCharacter, "Ich gehe zu Hannas Freundin.");
                 //await fadeScene();
                 //return "Friend";
-                await hndLocationDecision("Friend");
-                break;
+                await trainTransition();
+                return "Friend";
+
         }
 
 

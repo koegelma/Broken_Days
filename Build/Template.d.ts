@@ -45,9 +45,9 @@ declare namespace Broken_Days {
     };
     function showCredits(): void;
     function getAnimation(): ƒS.AnimationDefinition;
-    function fadeScene(): Promise<void>;
-    function hndLocationDecision(_scene: string): ƒS.SceneReturn;
-    function hndNextLocation(): ƒS.SceneReturn;
+    function fadeScene(_duration?: number): Promise<void>;
+    function trainTransition(): Promise<void>;
+    function hndNextLocation(): Promise<string>;
     function getTrainAnimation(): ƒS.AnimationDefinition;
 }
 declare namespace Broken_Days {
@@ -68,6 +68,7 @@ declare namespace Broken_Days {
                 shoked: string;
                 surprised: string;
                 tired: string;
+                asleep: string;
             };
         };
     };

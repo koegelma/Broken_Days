@@ -86,14 +86,14 @@ var Broken_Days;
         };
     }
     Broken_Days.getAnimation = getAnimation;
-    async function fadeScene() {
+    async function fadeScene(_duration = 1) {
         Broken_Days.ƒS.Location.show(Broken_Days.locations.blackscreen);
         Broken_Days.ƒS.Character.hideAll();
         Broken_Days.ƒS.Speech.hide();
-        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.update(_duration);
     }
     Broken_Days.fadeScene = fadeScene;
-    async function hndLocationDecision(_scene) {
+    async function trainTransition() {
         await fadeScene();
         await Broken_Days.ƒS.Location.show(Broken_Days.locations.train);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(75, 100));
@@ -102,9 +102,10 @@ var Broken_Days;
         //ƒS.Character.animate(characters.mainCharacter, characters.mainCharacter.pose.neutral, getTrainAnimation());
         await Broken_Days.ƒS.Progress.delay(5);
         await fadeScene();
-        return _scene;
+        /* console.log(_scene);
+        return _scene; */
     }
-    Broken_Days.hndLocationDecision = hndLocationDecision;
+    Broken_Days.trainTransition = trainTransition;
     async function hndNextLocation() {
         if (Broken_Days.dataForSave.DayTime != DayTime.EVENING) {
             await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich sollte meine Suche jetzt besser fortsetzen.");
@@ -113,7 +114,7 @@ var Broken_Days;
             return "LocationDecision";
         }
         // Evening
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Es ist schon spät... Ich sollte jetzt besser nach Hause gehen.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Es ist schon so spät... Ich sollte jetzt besser nach Hause gehen und morgen weiter suchen.");
         UpdateDayTime();
         await fadeScene();
         return "EndDay";
@@ -206,7 +207,9 @@ var Broken_Days;
             { id: "LocationDecision", scene: Broken_Days.LocationDecision, name: "LocationDecision" },
             { id: "Neighbour", scene: Broken_Days.Neighbour, name: "Neighbour" },
             { id: "School", scene: Broken_Days.School, name: "School" },
-            { id: "Friend", scene: Broken_Days.Friend, name: "Friend" }
+            { id: "Friend", scene: Broken_Days.Friend, name: "Friend" },
+            { id: "EndDay", scene: Broken_Days.EndDay, name: "EndDay" },
+            { id: "NewDay", scene: Broken_Days.NewDay, name: "NewDay" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Broken_Days.dataForSave = Broken_Days.ƒS.Progress.setData(Broken_Days.dataForSave, uiElement);
@@ -235,7 +238,8 @@ var Broken_Days;
                 sad: "./Images/Characters/Main/Sad.png",
                 shoked: "./Images/Characters/Main/Shoked.png",
                 surprised: "./Images/Characters/Main/Surprised.png",
-                tired: "./Images/Characters/Main/Tired.png"
+                tired: "./Images/Characters/Main/Tired.png",
+                asleep: "./Images/Characters/Main/Asleep.png"
             }
         }
         /* ,
@@ -258,6 +262,39 @@ var Broken_Days;
 (function (Broken_Days) {
     async function EndDay() {
         console.log("EndDay Scene starting");
+        let text = {
+            mainCharacter: {
+                T0000: "Ich kann nicht glauben, dass ich dich nicht gefunden habe!",
+                T0001: "Du kannst doch nicht einfach so wie vom Erdboden verschluckt sein!",
+                T0002: "Ich habe Mama und Papa doch damals versprochen, dass ich immer auf dich aufpassen werde!",
+                T0003: "Ich vermisse sie so sehr...",
+                T0004: "Irgendwie habe ich ein ganz komisches Gefühl bei der ganzen Sache...",
+                T0005: "Und jetzt bin ich auch noch sooo müde...",
+                T0006: "Vielleicht sollte ich schlafen gehen, in meinem jetzigen Zustand kann ich eh nicht mehr klar denken...",
+                T0007: "Morgen werde ich dich finden...",
+                T0008: "Ich verspreche es dir..."
+            }
+        };
+        await Broken_Days.ƒS.Location.show(Broken_Days.locations.room.night);
+        await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.tired, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0000);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0001);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0002);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0003);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0004);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0005);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0006);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0007);
+        await Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.asleep, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0008);
+        //await ƒS.Location.show(locations.room.night);
+        //await ƒS.update(4);
+        await Broken_Days.fadeScene(3);
+        return "NewDay";
     }
     Broken_Days.EndDay = EndDay;
 })(Broken_Days || (Broken_Days = {}));
@@ -470,7 +507,7 @@ var Broken_Days;
         await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Wo soll ich als nächstes suchen?");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Mhh, es ist schon Mittag. Wo soll ich als nächstes suchen?");
     }
     async function EveningRoutine() {
         console.log("Evening");
@@ -512,20 +549,20 @@ var Broken_Days;
                 await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich gehe zu meiner Nachbarin.");
                 //await fadeScene();
                 //return "Neighbour";
-                await Broken_Days.hndLocationDecision("Neighbour");
-                break;
+                await Broken_Days.trainTransition();
+                return "Neighbour";
             case nextLocationAnswers.iSaySchool:
                 await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich gehe zur Schule.");
                 //await fadeScene();
                 //return "School";
-                await Broken_Days.hndLocationDecision("School");
-                break;
+                await Broken_Days.trainTransition();
+                return "School";
             case nextLocationAnswers.iSayFriend:
                 await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich gehe zu Hannas Freundin.");
                 //await fadeScene();
                 //return "Friend";
-                await Broken_Days.hndLocationDecision("Friend");
-                break;
+                await Broken_Days.trainTransition();
+                return "Friend";
         }
     }
     Broken_Days.LocationDecision = LocationDecision;
@@ -570,7 +607,7 @@ var Broken_Days;
             },
             evening: {
                 name: "CityEvening",
-                background: "./Images/Backgrounds/City_Evening.png"
+                background: "./Images/Backgrounds/City_Night.png"
             }
         },
         // neighbour living room
@@ -666,6 +703,11 @@ var Broken_Days;
 (function (Broken_Days) {
     async function NewDay() {
         console.log("NewDay Scene starting");
+        await Broken_Days.ƒS.Location.show(Broken_Days.locations.room.day);
+        await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Oh man, das hat sich alles wie ein schlechter Traum angefühlt...");
     }
     Broken_Days.NewDay = NewDay;
 })(Broken_Days || (Broken_Days = {}));
