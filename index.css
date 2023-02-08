@@ -1,0 +1,198 @@
+scene {
+  width: 1280px;
+  height: 720px;
+  display: inline-block;
+  position: absolute;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+speech {
+  background-color: rgba(1, 23, 26, 0.7);
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 10vh;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+speech name {
+  border-right: 2px solid rgb(178, 178, 178);
+  margin-right: 5px;
+  padding: 0 3px;
+}
+
+speech content input{
+  border: none;
+  background-color: rgba(255, 255, 255, 0.26);
+  color: white;
+  width: 10%;
+  height: 30%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  cursor: text;
+}
+
+.decision {
+  background-color: transparent;
+  border: none;
+}
+
+/* .decisionClass:hover {
+  background-color: rgba(73, 73, 73, 0.318);
+} */
+
+.decision button {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 4px;
+  background-color: #464646;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.decision button:hover {
+  background-color: #2980B9;
+}
+
+
+dialog[type=splash] {
+  margin: 0px;
+  padding: 0px;
+  width: 50%;
+  height: 50%;
+  left: 25%;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+dialog[type=splash]>img#FudgeStoryLogo {
+  width: 100%;
+}
+
+dialog[type="inventory"] {
+ /*  width: 60%;
+  height: 80%;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(52, 52, 52, 0.936);
+  scroll-behavior: smooth;
+  color: white;
+  text-transform: uppercase; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(103, 103, 103, 0.867);
+  border: none;
+  scroll-behavior: smooth;
+  
+}
+
+dialog[type="inventory"]::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(103, 103, 103, 0.867);
+}
+
+dialog[type="inventory"]::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+dialog[type="inventory"]::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+dialog[type="inventory"] item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  margin: 20px;
+}
+
+dialog[type="inventory"] img {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 10px;
+  
+}
+
+dialog[type="inventory"] name {
+  font-size: 20px;
+  max-width: 60px !important;
+  width: 50px;
+  word-break: break-word;
+}
+
+dialog[type="inventory"] description {
+  font-size: 20px;
+  max-width: 550px !important;
+  width: 550px;
+  word-wrap: break-word;
+}
+
+dialog[type="inventory"] amount {
+  font-size: 20px;
+  width: 25px;
+  text-align: center;
+}
+
+/* dialog[type="inventor"] name {
+  font-size: 20px;
+  max-width: 60px !important;
+  width: 50px;
+  word-break: break-word;
+}
+
+dialog[type="inventory"] description {
+  font-size: 20px;
+  max-width: 50px !important;
+  width: 50px;
+  word-wrap: break-word;
+}
+
+dialog[type="inventor"] image {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+} */
+
+/* dialog[type="inventory"] li {
+  width: 100%;
+  height: 10%;
+  background-color: rgba(236, 236, 236, 0);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */

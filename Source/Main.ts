@@ -1,8 +1,17 @@
-namespace Template {
+namespace Broken_Days {
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
 
   console.log("Visual Novel starting");
+
+
+  export enum DayTime {
+    MORNING,
+    AFTERNOON,
+    EVENING
+  }
+
+  //export let dayTimes = ["morning", "afternoon", "evening"];
 
 
 
@@ -10,55 +19,31 @@ namespace Template {
   export let transitions = {
     puzzle: {
       duration: 1, // in Sekunden
-      alpha: "/FreeTransitions/5.jpg",
+      alpha: "./FreeTransitions/5.jpg",
       edge: 1
     }
   };
 
-  // sounds
-  export let sound = {
-    // themes
-    backgroundTheme: "Pfad",
-
-    // SFX
-    click: "Pfad"
+  export let dataForSave = {    // Alles was über Szenen hinaus gespeichert werden soll, Speicher-/Ladepunkt immer zu Beginn der Szene
+    nameProtagonist: "",
+    DayTime: DayTime.MORNING
   };
 
-  // backgrounds
-  export let locations = {
-    room: {
-      name: "Room",
-      background: "./Images/Backgrounds/Modern-Dormroom1.png"
-    },
-    park: {
-      name: "Park",
-      background: "./Images/Backgrounds/Modern-Street1.png"
+
+  export async function UpdateDayTime(): Promise<void> {
+    switch (dataForSave.DayTime) {
+      case DayTime.MORNING:
+        dataForSave.DayTime = DayTime.AFTERNOON;
+        break;
+      case DayTime.AFTERNOON:
+        dataForSave.DayTime = DayTime.EVENING;
+        break;
+      case DayTime.EVENING:
+        dataForSave.DayTime = DayTime.MORNING;
+        // start new day
+        break;
     }
-  };
-
-  export let characters = {
-    narrator: {
-      name: ""
-    },
-    mainCharacter: {
-      name: "Protagonist",
-      origin: ƒS.ORIGIN.BOTTOMCENTER,   // Ankerpunkt: Anfangsposition im Canvas, kann in der Szene umpositioniert werden
-      pose: {
-        angry: "./Images/Characters/Test/Test_Angry.png",
-        happy: "./Images/Characters/Test/Test_Happy_1.png",
-        neutral: "./Images/Characters/Test/Test_Neutral_1.png"
-      }
-    }/* ,
-    secondCharacter: {
-      name: "Second",
-      origin: ƒS.ORIGIN.BOTTOMCENTER,   // Ankerpunkt: Anfangsposition im Canvas, kann in der Szene umpositioniert werden
-      pose: {
-        angry: "Pfad.png",
-        happy: "Pfad.png",
-        neutral: "Pfad.png"
-      }
-    } */
-  };
+  }
 
   // items
   export let items = {
@@ -81,10 +66,6 @@ namespace Template {
     }
   };
 
-  export let dataForSave = {    // Alles was über Szenen hinaus gespeichert werden soll, Speicher-/Ladepunkt immer zu Beginn der Szene
-    nameProtagonist: "",
-    score: 0
-  };
 
   export function showCredits(): void {
     ƒS.Text.setClass("credtis"); //addClass; setClass überschreibt
@@ -96,6 +77,48 @@ namespace Template {
       start: { translation: ƒS.positions.bottomleft, rotation: -20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("white", 0.3) },
       end: { translation: ƒS.positions.bottomright, rotation: 20, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red") },
       duration: 1,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
+  export async function fadeScene(): Promise<void> {
+    ƒS.Location.show(locations.blackscreen);
+    ƒS.Character.hideAll();
+    ƒS.Speech.hide();
+    await ƒS.update(1);
+  }
+
+  export async function hndLocationDecision(_scene: string): ƒS.SceneReturn {
+    await fadeScene();
+    await ƒS.Location.show(locations.train);
+    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(75, 100));
+    ƒS.update();
+    // train sound
+    //ƒS.Character.animate(characters.mainCharacter, characters.mainCharacter.pose.neutral, getTrainAnimation());
+    await ƒS.Progress.delay(5);
+    await fadeScene();
+    return _scene;
+  }
+
+  export async function hndNextLocation(): ƒS.SceneReturn {
+    if (dataForSave.DayTime != DayTime.EVENING) {
+      await ƒS.Speech.tell(characters.mainCharacter, "Ich sollte meine Suche jetzt besser fortsetzen.");
+      UpdateDayTime();
+      await fadeScene();
+      return "LocationDecision";
+    }
+    // Evening
+    await ƒS.Speech.tell(characters.mainCharacter, "Es ist schon spät... Ich sollte jetzt besser nach Hause gehen.");
+    UpdateDayTime();
+    await fadeScene();
+    return "EndDay";
+  }
+
+  export function getTrainAnimation(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positionPercent(75, 90), rotation: 0, scaling: new ƒS.Position(1, 1) },
+      end: { translation: ƒS.positionPercent(75, 100), rotation: 0, scaling: new ƒS.Position(1, 1) },
+      duration: 0.5,
       playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
     };
   }
@@ -178,9 +201,13 @@ namespace Template {
     buttonFunctionalities("Close");
     let scenes: ƒS.Scenes = [
       //{ scene: Scene, name: "Scene" },
-      //{ scene: Introduction, name: "Introduction" }
-      { scene: Inventory_Test, name: "Inventory_Test" }
+      { scene: Introduction, name: "Introduction" },
+      //{ scene: Inventory_Test, name: "Inventory_Test" }
       //{id: "", scene: Scene, name: "Scene" , next:""}, --> next mit id ansprechen
+      { id: "LocationDecision", scene: LocationDecision, name: "LocationDecision" },
+      { id: "Neighbour", scene: Neighbour, name: "Neighbour" },
+      { id: "School", scene: School, name: "School" },
+      { id: "Friend", scene: Friend, name: "Friend" }
     ];
 
     let uiElement: HTMLElement = document.querySelector("[type=interface]");

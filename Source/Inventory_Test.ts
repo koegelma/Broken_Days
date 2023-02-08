@@ -1,10 +1,11 @@
-namespace Template {
+namespace Broken_Days {
     export async function Inventory_Test(): ƒS.SceneReturn {
 
-        await ƒS.Location.show(locations.room);
+        await ƒS.Location.show(locations.room.night);
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
+        // await ƒS.update();
         await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
-
+        await ƒS.update();
         await ƒS.Speech.tell(characters.mainCharacter, "Nanu, schon so spät?!");
         await ƒS.Speech.tell(characters.mainCharacter, "Ich muss dringend los zur Vorlesung, aber wo ist denn jetzt mein Handy?");
 
@@ -13,7 +14,7 @@ namespace Template {
             iSayBed: "Auf meinem Bett?"
         };
 
-        let phoneSearchElement = await ƒS.Menu.getInput(phoneSearchOptions, "individualCSSclass");
+        let phoneSearchElement = await ƒS.Menu.getInput(phoneSearchOptions, "decision");
 
         switch (phoneSearchElement) {
             case phoneSearchOptions.iSayTable:
