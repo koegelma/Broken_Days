@@ -2,9 +2,6 @@ declare namespace Broken_Days {
     function ApartmentEnd(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
-    function Cemetery(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     enum DayTime {
@@ -22,6 +19,15 @@ declare namespace Broken_Days {
     let dataForSave: {
         nameProtagonist: string;
         DayTime: DayTime;
+        daysPassed: number;
+        locations: {
+            laundryUnlocked: boolean;
+            onsenUnlocked: boolean;
+            shopUnlocked: boolean;
+            parkUnlocked: boolean;
+            psychologistUnlocked: boolean;
+            templeUnlocked: boolean;
+        };
     };
     function UpdateDayTime(): Promise<void>;
     let items: {
@@ -45,10 +51,10 @@ declare namespace Broken_Days {
     };
     function showCredits(): void;
     function getAnimation(): ƒS.AnimationDefinition;
-    function fadeScene(_duration?: number): Promise<void>;
-    function trainTransition(): Promise<void>;
-    function hndNextLocation(): Promise<string>;
     function getTrainAnimation(): ƒS.AnimationDefinition;
+    function trainTransition(): Promise<void>;
+    function fadeScene(_duration?: number): Promise<void>;
+    function hndNextLocation(): Promise<string>;
 }
 declare namespace Broken_Days {
     let characters: {
@@ -93,7 +99,7 @@ declare namespace Broken_Days {
     function Inventory_Test(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
-    function Laundromat(): ƒS.SceneReturn;
+    function Laundry(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
     function LocationDecision(): ƒS.SceneReturn;
@@ -106,6 +112,26 @@ declare namespace Broken_Days {
                 background: string;
             };
             evening: {
+                name: string;
+                background: string;
+            };
+            night: {
+                name: string;
+                background: string;
+            };
+        };
+        hannaBedroom: {
+            day: {
+                name: string;
+                background: string;
+            };
+            night: {
+                name: string;
+                background: string;
+            };
+        };
+        kitchen: {
+            day: {
                 name: string;
                 background: string;
             };
@@ -157,45 +183,95 @@ declare namespace Broken_Days {
             morning: {
                 name: string;
                 background: string;
-                visited: boolean;
             };
             afternoon: {
                 name: string;
                 background: string;
-                visited: boolean;
+            };
+            evening: {
+                name: string;
+                background: string;
             };
         };
         friend: {
             morning: {
                 name: string;
                 background: string;
-                visited: boolean;
             };
             afternoon: {
                 name: string;
                 background: string;
-                visited: boolean;
             };
             evening: {
                 name: string;
                 background: string;
-                visited: boolean;
             };
         };
-        laundromat: {
+        laundry: {
             name: string;
             background: string;
         };
+        onsen: {
+            day: {
+                name: string;
+                background: string;
+            };
+            evening: {
+                name: string;
+                background: string;
+            };
+        };
+        shop: {
+            morning: {
+                name: string;
+                background: string;
+            };
+            afternoon: {
+                name: string;
+                background: string;
+            };
+            evening: {
+                name: string;
+                background: string;
+            };
+        };
+        park: {
+            morning: {
+                name: string;
+                background: string;
+            };
+            afternoon: {
+                name: string;
+                background: string;
+            };
+            evening: {
+                name: string;
+                background: string;
+            };
+        };
+        psychologist: {
+            day: {
+                name: string;
+                background: string;
+            };
+            evening: {
+                name: string;
+                background: string;
+            };
+        };
     };
-}
-declare namespace Broken_Days {
-    function MusicSchool(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
     function Neighbour(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
     function NewDay(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function Onsen(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function Park(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
     function Psychologist(): ƒS.SceneReturn;
@@ -211,8 +287,7 @@ declare namespace Broken_Days {
 }
 declare namespace Broken_Days {
     let sound: {
-        backgroundTheme: string;
-        click: string;
+        trainAmbience: string;
     };
 }
 declare namespace Broken_Days {

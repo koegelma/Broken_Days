@@ -1,18 +1,18 @@
 namespace Broken_Days {
-    export async function Shop(): ƒS.SceneReturn {
-        console.log("Shop Scene starting");
+    export async function Onsen(): ƒS.SceneReturn {
+        console.log("Onsen Scene starting");
 
         switch (dataForSave.DayTime) {
             case DayTime.MORNING:
-                await ƒS.Location.show(locations.shop.morning);
+                await ƒS.Location.show(locations.onsen.day);
                 console.log("Day");
                 break;
             case DayTime.AFTERNOON:
-                await ƒS.Location.show(locations.shop.afternoon);
+                await ƒS.Location.show(locations.onsen.day);
                 console.log("Day");
                 break;
             case DayTime.EVENING:
-                await ƒS.Location.show(locations.shop.evening);
+                await ƒS.Location.show(locations.onsen.evening);
                 console.log("Evening");
                 break;
         }
@@ -20,7 +20,7 @@ namespace Broken_Days {
         await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
         await ƒS.update(1);
-        await ƒS.Speech.tell(characters.mainCharacter, "Hallo Laden, wie gehts?");
+        await ƒS.Speech.tell(characters.mainCharacter, "Hallo Onsen, wie gehts?");
 
         return hndNextLocation();
     }

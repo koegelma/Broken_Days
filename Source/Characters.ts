@@ -17,7 +17,7 @@ namespace Broken_Days {
                 happy: "./Images/Characters/Main/Happy.png",
                 neutral: "./Images/Characters/Main/Neutral.png",
                 sad: "./Images/Characters/Main/Sad.png",
-                shoked: "./Images/Characters/Main/Shoked.png",
+                shoked: "./Images/Characters/Main/Shocked.png",
                 surprised: "./Images/Characters/Main/Surprised.png",
                 tired: "./Images/Characters/Main/Tired.png",
                 asleep: "./Images/Characters/Main/Asleep.png"

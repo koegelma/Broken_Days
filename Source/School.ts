@@ -10,8 +10,7 @@ namespace Broken_Days {
                 await ƒS.Location.show(locations.school.afternoon);
                 break;
             case DayTime.EVENING:
-                //await ƒS.Location.show(locations.school.evening);
-                console.log("Evening not implemented yet");
+                await ƒS.Location.show(locations.school.evening);
                 break;
         }
 

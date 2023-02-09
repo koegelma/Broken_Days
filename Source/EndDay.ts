@@ -29,7 +29,7 @@ namespace Broken_Days {
         await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T0005);
         await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T0006);
         await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T0007);
-        await ƒS.Character.hide(characters.mainCharacter);
+        ƒS.Character.hide(characters.mainCharacter);
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.asleep, ƒS.positionPercent(25, 100));
         await ƒS.update(1);
         await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T0008);
