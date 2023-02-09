@@ -182,6 +182,11 @@ namespace Broken_Days {
                 name: "TempleEvening",
                 background: "./Images/Backgrounds/Temple_Evening.png"
             }
+        },
+        // Restaurant
+        restaurant: {
+            name: "Restaurant",
+            background: "./Images/Backgrounds/Restaurant.png"
         }
     };
 }

@@ -16,7 +16,7 @@ namespace Broken_Days {
             }
         };
 
-
+        ƒS.Sound.play(sound.kotoTheme, 1, true);
         await ƒS.Location.show(locations.room.night);
         await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.tired, ƒS.positionPercent(25, 100));
@@ -36,6 +36,7 @@ namespace Broken_Days {
         await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T0008);
         //await ƒS.Location.show(locations.room.night);
         //await ƒS.update(4);
+        ƒS.Sound.fade(sound.kotoTheme, 0, 1);
         await fadeScene(3);
         return "NewDay";
     }

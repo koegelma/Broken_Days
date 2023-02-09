@@ -17,12 +17,14 @@ namespace Broken_Days {
                 break;
         }
 
+        ƒS.Sound.play(sound.kotoTheme, 1, true);
         await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
         await ƒS.update(1);
         await ƒS.Speech.tell(characters.mainCharacter, "Hallo Nachbar, wie gehts?");
-
-
+        
+        ƒS.Sound.fade(sound.kotoTheme, 0, 1);
+        
         return hndNextLocation();
     }
 }

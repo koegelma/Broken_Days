@@ -3,6 +3,8 @@ var Broken_Days;
 (function (Broken_Days) {
     async function ApartmentEnd() {
         console.log("ApartmentEnd Scene starting");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
     }
     Broken_Days.ApartmentEnd = ApartmentEnd;
 })(Broken_Days || (Broken_Days = {}));
@@ -298,6 +300,7 @@ var Broken_Days;
                 T0008: "Ich verspreche es dir..."
             }
         };
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
         await Broken_Days.ƒS.Location.show(Broken_Days.locations.room.night);
         await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.tired, Broken_Days.ƒS.positionPercent(25, 100));
@@ -317,6 +320,7 @@ var Broken_Days;
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0008);
         //await ƒS.Location.show(locations.room.night);
         //await ƒS.update(4);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
         await Broken_Days.fadeScene(3);
         return "NewDay";
     }
@@ -326,6 +330,8 @@ var Broken_Days;
 (function (Broken_Days) {
     async function Ending() {
         console.log("Ending Scene starting");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
     }
     Broken_Days.Ending = Ending;
 })(Broken_Days || (Broken_Days = {}));
@@ -333,6 +339,8 @@ var Broken_Days;
 (function (Broken_Days) {
     async function Epilogue() {
         console.log("Epilogue Scene starting");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
     }
     Broken_Days.Epilogue = Epilogue;
 })(Broken_Days || (Broken_Days = {}));
@@ -365,6 +373,7 @@ var Broken_Days;
 (function (Broken_Days) {
     async function Introduction() {
         console.log("Introduction Scene starting");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
         let text = {
             Narrator: {
                 T001: "Hallo!",
@@ -430,6 +439,7 @@ var Broken_Days;
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T006);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T007);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T008);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
         await Broken_Days.fadeScene();
         return "LocationDecision";
     }
@@ -778,6 +788,11 @@ var Broken_Days;
                 name: "TempleEvening",
                 background: "./Images/Backgrounds/Temple_Evening.png"
             }
+        },
+        // Restaurant
+        restaurant: {
+            name: "Restaurant",
+            background: "./Images/Backgrounds/Restaurant.png"
         }
     };
 })(Broken_Days || (Broken_Days = {}));
@@ -799,10 +814,12 @@ var Broken_Days;
                 console.log("Evening");
                 break;
         }
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
         await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo Nachbar, wie gehts?");
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
         return Broken_Days.hndNextLocation();
     }
     Broken_Days.Neighbour = Neighbour;
@@ -826,6 +843,7 @@ var Broken_Days;
                 T0002: ""
             }
         }; */
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
         await Broken_Days.ƒS.Location.show(Broken_Days.locations.room.day);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
@@ -836,6 +854,7 @@ var Broken_Days;
         for (let i = 0; i < text.length; i++) {
             await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text[i]);
         }
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
     }
     Broken_Days.NewDay = NewDay;
 })(Broken_Days || (Broken_Days = {}));
@@ -843,6 +862,7 @@ var Broken_Days;
 (function (Broken_Days) {
     async function Onsen() {
         console.log("Onsen Scene starting");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.onsenAmbience, 1, true);
         switch (Broken_Days.dataForSave.DayTime) {
             case Broken_Days.DayTime.MORNING:
                 await Broken_Days.ƒS.Location.show(Broken_Days.locations.onsen.day);
@@ -861,6 +881,7 @@ var Broken_Days;
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo Onsen, wie gehts?");
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.onsenAmbience, 0, 1);
         return Broken_Days.hndNextLocation();
     }
     Broken_Days.Onsen = Onsen;
@@ -911,10 +932,12 @@ var Broken_Days;
                 console.log("Evening");
                 break;
         }
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
         await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo Psychologe, wie gehts?");
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
         return Broken_Days.hndNextLocation();
     }
     Broken_Days.Psychologist = Psychologist;
@@ -923,6 +946,13 @@ var Broken_Days;
 (function (Broken_Days) {
     async function Restaurant() {
         console.log("Restaurant Scene starting");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.restaurantAmbience, 1, true);
+        await Broken_Days.ƒS.Location.show(Broken_Days.locations.restaurant);
+        await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo Restaurant, wie gehts?");
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.restaurantAmbience, 0, 1);
     }
     Broken_Days.Restaurant = Restaurant;
 })(Broken_Days || (Broken_Days = {}));
@@ -986,6 +1016,7 @@ var Broken_Days;
     // sounds
     Broken_Days.sound = {
         // themes
+        kotoTheme: "./Audio/391828__zagi2__koto-theme.wav",
         // SFX
         yawn: "./Audio/HumanYawn_S08HU.2522.wav",
         // ambience
@@ -993,7 +1024,9 @@ var Broken_Days;
         templeAmbience: "./Audio/0110_JapaneseWinter_Full_MZ.wav",
         urbanAmbience: "./Audio/Traffic_amb_park_grg.wav",
         landryAmbience: "./Audio/AMB_INT_Laundry_Washer_Running_BTM00033.mp3",
-        schoolAmbience: "./Audio/HighSchoolHallway_BWU.12.wav" // source: prosoundeffects.com
+        schoolAmbience: "./Audio/HighSchoolHallway_BWU.12.wav",
+        onsenAmbience: "./Audio/SwimmingPoolAmb_S08SP.864.wav",
+        restaurantAmbience: "./Audio/RestaurantCrowd_S08AM.55.wav" // source: prosoundeffects.com
     };
 })(Broken_Days || (Broken_Days = {}));
 var Broken_Days;

@@ -2,6 +2,8 @@ namespace Broken_Days {
   export async function Introduction(): ƒS.SceneReturn {
     console.log("Introduction Scene starting");
 
+    ƒS.Sound.play(sound.kotoTheme, 1, true);
+
     let text = {
       Narrator: {
         T001: "Hallo!",
@@ -79,6 +81,8 @@ namespace Broken_Days {
     await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T006);
     await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T007);
     await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T008);
+    
+    ƒS.Sound.fade(sound.kotoTheme, 0, 1);
 
     await fadeScene();
     return "LocationDecision";

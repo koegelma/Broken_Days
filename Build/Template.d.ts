@@ -273,6 +273,10 @@ declare namespace Broken_Days {
                 background: string;
             };
         };
+        restaurant: {
+            name: string;
+            background: string;
+        };
     };
 }
 declare namespace Broken_Days {
@@ -301,12 +305,15 @@ declare namespace Broken_Days {
 }
 declare namespace Broken_Days {
     let sound: {
+        kotoTheme: string;
         yawn: string;
         trainAmbience: string;
         templeAmbience: string;
         urbanAmbience: string;
         landryAmbience: string;
         schoolAmbience: string;
+        onsenAmbience: string;
+        restaurantAmbience: string;
     };
 }
 declare namespace Broken_Days {
