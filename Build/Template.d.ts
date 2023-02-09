@@ -1,7 +1,4 @@
 declare namespace Broken_Days {
-    function ApartmentEnd(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     enum DayTime {
@@ -9,17 +6,11 @@ declare namespace Broken_Days {
         AFTERNOON = 1,
         EVENING = 2
     }
-    let transitions: {
-        puzzle: {
-            duration: number;
-            alpha: string;
-            edge: number;
-        };
-    };
     let dataForSave: {
         nameProtagonist: string;
         DayTime: DayTime;
         daysPassed: number;
+        dayTimeIndex: number;
         locations: {
             laundryUnlocked: boolean;
             onsenUnlocked: boolean;
@@ -30,6 +21,20 @@ declare namespace Broken_Days {
         };
     };
     function UpdateDayTime(): Promise<void>;
+    function showCredits(): void;
+    function getAnimation(): ƒS.AnimationDefinition;
+    function getTrainAnimation(): ƒS.AnimationDefinition;
+    let transitions: {
+        puzzle: {
+            duration: number;
+            alpha: string;
+            edge: number;
+        };
+    };
+    function trainTransition(): Promise<void>;
+    function hndTransition(): Promise<void>;
+    function fadeScene(_duration?: number): Promise<void>;
+    function hndNextLocation(): Promise<string>;
     let items: {
         handy: {
             name: string;
@@ -49,12 +54,6 @@ declare namespace Broken_Days {
             image: string;
         };
     };
-    function showCredits(): void;
-    function getAnimation(): ƒS.AnimationDefinition;
-    function getTrainAnimation(): ƒS.AnimationDefinition;
-    function trainTransition(): Promise<void>;
-    function fadeScene(_duration?: number): Promise<void>;
-    function hndNextLocation(): Promise<string>;
 }
 declare namespace Broken_Days {
     let characters: {
@@ -81,28 +80,7 @@ declare namespace Broken_Days {
     function UpdateName(): Promise<void>;
 }
 declare namespace Broken_Days {
-    function EndDay(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
-    function Ending(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
-    function Epilogue(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
-    function Friend(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
-    function Introduction(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
     function Inventory_Test(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
-    function Laundry(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
-    function LocationDecision(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
     let locations: {
@@ -166,17 +144,14 @@ declare namespace Broken_Days {
             morning: {
                 name: string;
                 background: string;
-                visited: boolean;
             };
             afternoon: {
                 name: string;
                 background: string;
-                visited: boolean;
             };
             evening: {
                 name: string;
                 background: string;
-                visited: boolean;
             };
         };
         school: {
@@ -280,6 +255,43 @@ declare namespace Broken_Days {
     };
 }
 declare namespace Broken_Days {
+    let sound: {
+        kotoTheme: string;
+        yawn: string;
+        trainAmbience: string;
+        templeAmbience: string;
+        urbanAmbience: string;
+        landryAmbience: string;
+        schoolAmbience: string;
+        onsenAmbience: string;
+        restaurantAmbience: string;
+    };
+}
+declare namespace Broken_Days {
+    function ApartmentEnd(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function EndDay(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function Ending(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function Epilogue(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function Friend(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function Introduction(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function Laundry(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
+    function LocationDecision(): ƒS.SceneReturn;
+}
+declare namespace Broken_Days {
     function Neighbour(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
@@ -302,19 +314,6 @@ declare namespace Broken_Days {
 }
 declare namespace Broken_Days {
     function Shop(): ƒS.SceneReturn;
-}
-declare namespace Broken_Days {
-    let sound: {
-        kotoTheme: string;
-        yawn: string;
-        trainAmbience: string;
-        templeAmbience: string;
-        urbanAmbience: string;
-        landryAmbience: string;
-        schoolAmbience: string;
-        onsenAmbience: string;
-        restaurantAmbience: string;
-    };
 }
 declare namespace Broken_Days {
     function Temple(): ƒS.SceneReturn;

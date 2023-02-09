@@ -3,9 +3,21 @@ namespace Broken_Days {
         console.log("Laundry Scene starting");
 
         ƒS.Sound.play(sound.landryAmbience, 0.7, true);
-
         await ƒS.Location.show(locations.laundry);
         await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
+
+        switch (dataForSave.DayTime) {
+            case DayTime.MORNING:
+                MorningRoutine();
+                break;
+            case DayTime.AFTERNOON:
+                AfternoonRoutine();
+                break;
+            case DayTime.EVENING:
+                EveningRoutine();
+                break;
+        }
+
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
         await ƒS.update(1);
         await ƒS.Speech.tell(characters.mainCharacter, "Hallo Waschsalon, wie gehts?");
@@ -13,5 +25,20 @@ namespace Broken_Days {
         ƒS.Sound.fade(sound.landryAmbience, 0, 1);
 
         return hndNextLocation();
+    }
+
+    async function MorningRoutine(): Promise<void> {
+        //no clue
+        //hndTransition();
+    }
+
+    async function AfternoonRoutine(): Promise<void> {
+        // --> unlock park
+        //hndTransition();
+    }
+
+    async function EveningRoutine(): Promise<void> {
+        //no clue
+        //hndTransition();
     }
 }

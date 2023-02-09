@@ -2,82 +2,38 @@ namespace Broken_Days {
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
 
-  console.log("Visual Novel starting");
-
-
   export enum DayTime {
     MORNING,
     AFTERNOON,
     EVENING
   }
 
-  //export let dayTimes = ["morning", "afternoon", "evening"];
+  const dayTimes = [DayTime.MORNING, DayTime.AFTERNOON, DayTime.EVENING];
 
 
-
-  // transitions
-  export let transitions = {
-    puzzle: {
-      duration: 1, // in Sekunden
-      alpha: "./FreeTransitions/5.jpg",
-      edge: 1
-    }
-  };
-
-  // Alles was über Szenen hinaus gespeichert werden soll, Speicher-/Ladepunkt immer zu Beginn der Szene
   export let dataForSave = {
     nameProtagonist: "",
     DayTime: DayTime.MORNING,
     daysPassed: 0,
+    dayTimeIndex: 0,
     locations: {
-      laundryUnlocked: true,
-      onsenUnlocked: true,
-      shopUnlocked: true,
-      parkUnlocked: true,
-      psychologistUnlocked: true,
-      templeUnlocked: true
+      laundryUnlocked: false,
+      onsenUnlocked: false,
+      shopUnlocked: false,
+      parkUnlocked: false,
+      psychologistUnlocked: false,
+      templeUnlocked: false
     }
   };
-
 
   export async function UpdateDayTime(): Promise<void> {
-    switch (dataForSave.DayTime) {
-      case DayTime.MORNING:
-        dataForSave.DayTime = DayTime.AFTERNOON;
-        break;
-      case DayTime.AFTERNOON:
-        dataForSave.DayTime = DayTime.EVENING;
-        break;
-      case DayTime.EVENING:
-        dataForSave.DayTime = DayTime.MORNING;
-        dataForSave.daysPassed++;
-        console.log("New day! " + dataForSave.daysPassed + " days passed.");
-        // start new day
-        break;
+    dataForSave.dayTimeIndex = (dataForSave.dayTimeIndex + 1) % dayTimes.length;
+    if (dataForSave.dayTimeIndex === 0) {
+      dataForSave.daysPassed++;
+      console.log("New day! " + dataForSave.daysPassed + " days passed.");
     }
+    dataForSave.DayTime = dayTimes[dataForSave.dayTimeIndex];
   }
-
-  // items
-  export let items = {
-    handy: {
-      name: "Handy",
-      description: "Dein eigenes Handy, wow.",
-      image: "./Images/Items/phone.png",
-      static: true
-    },
-    laptop: {
-      name: "Laptop",
-      description: "Dein eigener Laptop, wow.",
-      image: "./Images/Items/laptop.png",
-      static: true
-    },
-    apple: {
-      name: "Apfel",
-      description: "Lecker, Apfel.",
-      image: "./Images/Items/apple.png"
-    }
-  };
-
 
   export function showCredits(): void {
     ƒS.Text.setClass("credtis"); //addClass; setClass überschreibt
@@ -102,6 +58,15 @@ namespace Broken_Days {
     };
   }
 
+  // transitions
+  export let transitions = {
+    puzzle: {
+      duration: 1,
+      alpha: "./FreeTransitions/5.jpg",
+      edge: 1
+    }
+  };
+
   export async function trainTransition(): Promise<void> {
     await fadeScene();
     await ƒS.Location.show(locations.train);
@@ -118,8 +83,12 @@ namespace Broken_Days {
     await ƒS.Progress.delay(2);
     ƒS.Sound.fade(sound.trainAmbience, 0, 1);
     await fadeScene(2);
-    /* console.log(_scene);
-    return _scene; */
+  }
+
+  export async function hndTransition(): Promise<void> {
+    await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
+    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
+    await ƒS.update(1);
   }
 
   export async function fadeScene(_duration: number = 1): Promise<void> {
@@ -137,15 +106,35 @@ namespace Broken_Days {
       return "LocationDecision";
     }
     // Evening
-    await ƒS.Speech.tell(characters.mainCharacter, "Es ist schon so spät... Ich sollte jetzt besser nach Hause gehen und morgen weiter suchen.");
+    await ƒS.Speech.tell(characters.mainCharacter, "Es ist schon so spät... Ich sollte jetzt besser nach Hause gehen und dort schauen.");
     UpdateDayTime();
     await fadeScene();
     return "EndDay";
   }
 
-  // Menu
+  // items
+  export let items = {
+    handy: {
+      name: "Handy",
+      description: "Dein eigenes Handy, wow.",
+      image: "./Images/Items/phone.png",
+      static: true
+    },
+    laptop: {
+      name: "Laptop",
+      description: "Dein eigener Laptop, wow.",
+      image: "./Images/Items/laptop.png",
+      static: true
+    },
+    apple: {
+      name: "Apfel",
+      description: "Lecker, Apfel.",
+      image: "./Images/Items/apple.png"
+    }
+  };
 
-  //buttons
+  // menu
+  // buttons
   let inGameMenuButttons = {
     save: "Save",
     load: "Load",
@@ -176,6 +165,8 @@ namespace Broken_Days {
         break;
     }
   }
+
+
 
   // shortcuts fürs menu
   document.addEventListener("keydown", hndKeyPress);

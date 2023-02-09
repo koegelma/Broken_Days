@@ -67,18 +67,15 @@ namespace Broken_Days {
         neighbour: {
             morning: {
                 name: "NeighbourMorning",
-                background: "./Images/Backgrounds/Neighbour_Morning.png",
-                visited: false
+                background: "./Images/Backgrounds/Neighbour_Morning.png"
             },
             afternoon: {
                 name: "NeighbourAfternoon",
-                background: "./Images/Backgrounds/Neighbour_Afternoon.png",
-                visited: false
+                background: "./Images/Backgrounds/Neighbour_Afternoon.png"
             },
             evening: {
                 name: "NeighbourEvening",
-                background: "./Images/Backgrounds/Neighbour_Evening.png",
-                visited: false
+                background: "./Images/Backgrounds/Neighbour_Evening.png"
             }
         },
         // school

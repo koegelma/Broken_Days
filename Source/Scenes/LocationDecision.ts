@@ -17,7 +17,6 @@ namespace Broken_Days {
                 break;
         }
 
-        // check available locations (if they have been searched already, they are not available, or if they are already unlocked)
         let nextLocationAnswers = {
             iSayNeighbour: "Nachbarin",
             iSaySchool: "Schule",
@@ -105,7 +104,7 @@ namespace Broken_Days {
         await ƒS.Speech.tell(characters.mainCharacter, "Der Tag neigt sich dem Ende zu... Wo soll ich jetzt noch suchen?");
     }
 
-    function updateLocationAnswers(nextLocationAnswers: {
+    function updateLocationAnswers(_nextLocationAnswers: {
         iSayNeighbour: string;
         iSaySchool: string;
         iSayFriend: string;
@@ -117,16 +116,16 @@ namespace Broken_Days {
         iSayTemple?: string;
     }): void {
 
-        if (dataForSave.locations.laundryUnlocked) nextLocationAnswers.iSayLaundry = "Waschsalon";
+        if (dataForSave.locations.laundryUnlocked) _nextLocationAnswers.iSayLaundry = "Waschsalon";
 
-        if (dataForSave.locations.onsenUnlocked) nextLocationAnswers.iSayOnsen = "Onsen";
+        if (dataForSave.locations.onsenUnlocked) _nextLocationAnswers.iSayOnsen = "Onsen";
 
-        if (dataForSave.locations.shopUnlocked) nextLocationAnswers.iSayShop = "Laden";
+        if (dataForSave.locations.shopUnlocked) _nextLocationAnswers.iSayShop = "Laden";
 
-        if (dataForSave.locations.parkUnlocked) nextLocationAnswers.iSayPark = "Park";
+        if (dataForSave.locations.parkUnlocked) _nextLocationAnswers.iSayPark = "Park";
 
-        if (dataForSave.locations.psychologistUnlocked) nextLocationAnswers.iSayPsychologist = "Psychologe";
+        if (dataForSave.locations.psychologistUnlocked) _nextLocationAnswers.iSayPsychologist = "Psychologe";
 
-        if (dataForSave.locations.templeUnlocked) nextLocationAnswers.iSayTemple = "Tempel";
+        if (dataForSave.locations.templeUnlocked) _nextLocationAnswers.iSayTemple = "Tempel";
     }
 }
