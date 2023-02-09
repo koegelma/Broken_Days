@@ -2,6 +2,8 @@ namespace Broken_Days {
     export async function Park(): ƒS.SceneReturn {
         console.log("Park Scene starting");
 
+        ƒS.Sound.play(sound.urbanAmbience, 1, true);
+
         switch (dataForSave.DayTime) {
             case DayTime.MORNING:
                 await ƒS.Location.show(locations.park.morning);
@@ -22,6 +24,7 @@ namespace Broken_Days {
         await ƒS.update(1);
         await ƒS.Speech.tell(characters.mainCharacter, "Hallo Park, wie gehts?");
 
+        ƒS.Sound.fade(sound.urbanAmbience, 0, 1);
 
         return hndNextLocation();
     }

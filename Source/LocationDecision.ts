@@ -3,6 +3,8 @@ namespace Broken_Days {
     export async function LocationDecision(): ƒS.SceneReturn {
         console.log("LocationDecision Scene starting");
 
+        ƒS.Sound.play(sound.urbanAmbience, 1, true);
+
         switch (dataForSave.DayTime) {
             case DayTime.MORNING:
                 await MorningRoutine();
@@ -25,6 +27,8 @@ namespace Broken_Days {
         updateLocationAnswers(nextLocationAnswers);
 
         let nextLocation = await ƒS.Menu.getInput(nextLocationAnswers, "decision");
+
+        ƒS.Sound.fade(sound.urbanAmbience, 0, 1);
 
         switch (nextLocation) {
             case nextLocationAnswers.iSayNeighbour:

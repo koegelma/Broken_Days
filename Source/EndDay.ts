@@ -31,6 +31,7 @@ namespace Broken_Days {
         await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T0007);
         ƒS.Character.hide(characters.mainCharacter);
         await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.asleep, ƒS.positionPercent(25, 100));
+        ƒS.Sound.fade(sound.yawn, 0, 2);
         await ƒS.update(1);
         await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T0008);
         //await ƒS.Location.show(locations.room.night);

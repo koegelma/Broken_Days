@@ -259,6 +259,20 @@ declare namespace Broken_Days {
                 background: string;
             };
         };
+        temple: {
+            morning: {
+                name: string;
+                background: string;
+            };
+            afternoon: {
+                name: string;
+                background: string;
+            };
+            evening: {
+                name: string;
+                background: string;
+            };
+        };
     };
 }
 declare namespace Broken_Days {
@@ -287,7 +301,12 @@ declare namespace Broken_Days {
 }
 declare namespace Broken_Days {
     let sound: {
+        yawn: string;
         trainAmbience: string;
+        templeAmbience: string;
+        urbanAmbience: string;
+        landryAmbience: string;
+        schoolAmbience: string;
     };
 }
 declare namespace Broken_Days {

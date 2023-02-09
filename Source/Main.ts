@@ -30,12 +30,12 @@ namespace Broken_Days {
     DayTime: DayTime.MORNING,
     daysPassed: 0,
     locations: {
-      laundryUnlocked: false,
-      onsenUnlocked: false,
-      shopUnlocked: false,
-      parkUnlocked: false,
-      psychologistUnlocked: false,
-      templeUnlocked: false
+      laundryUnlocked: true,
+      onsenUnlocked: true,
+      shopUnlocked: true,
+      parkUnlocked: true,
+      psychologistUnlocked: true,
+      templeUnlocked: true
     }
   };
 

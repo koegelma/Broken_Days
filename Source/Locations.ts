@@ -167,6 +167,21 @@ namespace Broken_Days {
                 name: "PsychologistEvening",
                 background: "./Images/Backgrounds/Psychologist_Evening.png"
             }
+        },
+        // temple
+        temple: {
+            morning: {
+                name: "TempleMorning",
+                background: "./Images/Backgrounds/Temple_Morning.png"
+            },
+            afternoon: {
+                name: "TempleAfternoon",
+                background: "./Images/Backgrounds/Temple_Afternoon.png"
+            },
+            evening: {
+                name: "TempleEvening",
+                background: "./Images/Backgrounds/Temple_Evening.png"
+            }
         }
     };
 }
