@@ -36,5 +36,8 @@ namespace Broken_Days {
         }
         
         ƒS.Sound.fade(sound.kotoTheme, 0, 1);
+
+        await fadeScene();
+        return "LocationDecision";
     }
 }

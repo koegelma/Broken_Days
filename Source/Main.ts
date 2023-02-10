@@ -16,6 +16,9 @@ namespace Broken_Days {
     DayTime: DayTime.MORNING,
     daysPassed: 0,
     dayTimeIndex: 0,
+    decisions: {
+      calledWork: false
+    },
     locations: {
       laundryUnlocked: false,
       onsenUnlocked: false,

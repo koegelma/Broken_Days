@@ -15,6 +15,9 @@ var Broken_Days;
         DayTime: DayTime.MORNING,
         daysPassed: 0,
         dayTimeIndex: 0,
+        decisions: {
+            calledWork: false
+        },
         locations: {
             laundryUnlocked: false,
             onsenUnlocked: false,
@@ -239,6 +242,11 @@ var Broken_Days;
             origin: Broken_Days.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {}
         },
+        blank: {
+            name: " ",
+            origin: Broken_Days.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {}
+        },
         mainCharacter: {
             name: Broken_Days.dataForSave.nameProtagonist,
             origin: Broken_Days.ƒS.ORIGIN.BOTTOMCENTER,
@@ -252,6 +260,26 @@ var Broken_Days;
                 tired: "./Images/Characters/Main/Tired.png",
                 asleep: "./Images/Characters/Main/Asleep.png"
             }
+        },
+        Takashi: {
+            name: "Takashi",
+            origin: Broken_Days.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {}
+        },
+        Etsuko: {
+            name: "Etsuko",
+            origin: Broken_Days.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                neutral: "./Images/Characters/Etsuko/Neutral.png",
+                optimistic: "./Images/Characters/Etsuko/Optimistic.png",
+                sad: "./Images/Characters/Etsuko/Sad.png",
+                surprised: "./Images/Characters/Etsuko/Surprised.png"
+            }
+        },
+        Kana: {
+            name: "Kana",
+            origin: Broken_Days.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {}
         }
         /* ,
         secondCharacter: {
@@ -506,6 +534,9 @@ var Broken_Days;
         kotoTheme: "./Audio/391828__zagi2__koto-theme.wav",
         // SFX
         yawn: "./Audio/HumanYawn_S08HU.2522.wav",
+        phoneVibrate: "./Audio/CellPhoneVibrate_BWU.554.wav",
+        phoneOutgoing: "./Audio/CellPhoneRing_short.wav",
+        phoneTurnedOff: "./Audio/Phone,Speaker,OffTheHook.wav",
         // ambience
         trainAmbience: "./Audio/TRAIN_MELBOURNE_PASSENGER_XTRAPOLIS_100_INTERIOR_2_STOPS_STEREO_.wav",
         templeAmbience: "./Audio/0110_JapaneseWinter_Full_MZ.wav",
@@ -531,15 +562,17 @@ var Broken_Days;
         console.log("EndDay Scene starting");
         let text = {
             mainCharacter: {
-                T0000: "Ich kann nicht glauben, dass ich dich nicht gefunden habe!",
-                T0001: "Du kannst doch nicht einfach so wie vom Erdboden verschluckt sein!",
-                T0002: "Ich habe Mama und Papa doch damals versprochen, dass ich immer auf dich aufpassen werde!",
-                T0003: "Ich vermisse sie so sehr...",
-                T0004: "Irgendwie habe ich ein ganz komisches Gefühl bei der ganzen Sache...",
-                T0005: "Und jetzt bin ich auch noch sooo müde...",
-                T0006: "Vielleicht sollte ich schlafen gehen, in meinem jetzigen Zustand kann ich eh nicht mehr klar denken...",
-                T0007: "Morgen werde ich dich finden...",
-                T0008: "Ich verspreche es dir..."
+                T00: "Hier ist sie auch nicht!",
+                T01: "...",
+                T02: "Ich kann nicht glauben, dass ich dich nicht gefunden habe!",
+                T03: "Du kannst doch nicht einfach so wie vom Erdboden verschluckt sein!",
+                T04: "Ich habe Mama und Papa doch damals versprochen, dass ich immer auf dich aufpassen werde!",
+                T05: "Ich vermisse sie so sehr...",
+                T06: "Irgendwie habe ich ein ganz komisches Gefühl bei der ganzen Sache...",
+                T07: "Und jetzt bin ich auch noch sooo müde...",
+                T08: "Vielleicht sollte ich schlafen gehen, in meinem jetzigen Zustand kann ich eh nicht mehr klar denken...",
+                T09: "Morgen werde ich dich finden...",
+                T10: "Ich verspreche es dir..."
             }
         };
         Broken_Days.ƒS.Sound.play(Broken_Days.sound.kotoTheme, 1, true);
@@ -547,19 +580,20 @@ var Broken_Days;
         await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.tired, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0000);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0001);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0002);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0003);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0004);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0005);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0006);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0007);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T00);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T01);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T03);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T04);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T05);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T06);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T07);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T08);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T09);
         Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.asleep, Broken_Days.ƒS.positionPercent(25, 100));
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.yawn, 0, 2);
         await Broken_Days.ƒS.update(1);
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T0008);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T10);
         //await ƒS.Location.show(locations.room.night);
         //await ƒS.update(4);
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
@@ -636,15 +670,27 @@ var Broken_Days;
             mainCharacter: {
                 T001: "<Insert Gähnen Here> Guten Morgen!",
                 T002: "Oh, es ist schon 9 Uhr?! Ich muss schnell aufstehen und meine Schwester wecken!",
-                T003: "Ich hoffe, sie hat heute keine schlechte Laune...",
+                T003: "Ich hoffe, sie kommt nicht wieder zu spät zur Schule...",
                 T004: "Nanu, wo ist sie denn?",
                 T005: "Ich glaube, ich habe sie gehört. Sie ist in der Küche.",
                 T006: "Hanna?!",
                 T007: "Hanna, wo bist du?!",
-                T008: "Das kann doch nicht sein, sie würde doch nicht einfach verschwinden ohne etwas zu sagen!"
+                T008: "Das kann doch nicht sein, sie würde doch nicht einfach verschwinden ohne etwas zu sagen!",
+                T009: "Ich sollte mal versuchen sie anzurufen...",
+                T010: "Mist, sie hat ihr Telefon ausgeschaltet.",
+                T011: "Ich muss sie schnell finden, in 2 Stunden muss ich zur Arbeit!",
+                T012: "Vielleicht sollte ich lieber schon mal auf der Arbeit anrufen und Bescheid sagen, dass ich nicht kommen kann?",
+                T013: "Mhh, wo könnte sie sein?",
+                T014: "Sie könnte schon zur Schule gegangen sein?",
+                T015: "Vielleicht ist sie aber auch bei unserer früheren Nachbarin Etsuko?",
+                T016: "Oder sie ist bei ihrer Freundin Kana?",
+                T017: "Ich sollte mich jetzt besser schnell auf die Suche machen."
                 // -> Hanna suchen
                 // -> Im Restaurant Bescheid geben, dass ich nicht zur Arbeit kommen kann - Hinweis auf Wochentag
                 // -> 3 Möglichkeiten: Bei Nachbarin, in der Schule, bei ihrer Freundin
+            },
+            blank: {
+                T001: "..."
             }
         };
         //ƒS.Sound.play();
@@ -691,11 +737,64 @@ var Broken_Days;
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T006);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T007);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T008);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T009);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.blank, text.blank.T001);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.phoneTurnedOff, 0, 4);
+        await Broken_Days.ƒS.Progress.delay(4);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T010);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T011);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T012);
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.angry, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        let callWorkAnswers = {
+            iSayYes: "Ich rufe besser an",
+            iSayNo: "Ich habe jetzt keine Zeit anzurufen"
+        };
+        let nextLocation = await Broken_Days.ƒS.Menu.getInput(callWorkAnswers, "decision");
+        switch (nextLocation) {
+            case callWorkAnswers.iSayYes:
+                await CallWorkDecision();
+                break;
+            case callWorkAnswers.iSayNo:
+                await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich habe jetzt keine Zeit dafür, ich muss sie finden!");
+                await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Heute ist Montag, da ist normal eh nicht viel los. Es wird bestimmt kein Problem sein, wenn ich später komme.");
+                break;
+        }
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T013);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T014);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T015);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T016);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text.mainCharacter.T017);
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
         await Broken_Days.fadeScene();
         return "LocationDecision";
     }
     Broken_Days.Introduction = Introduction;
+    async function CallWorkDecision() {
+        Broken_Days.dataForSave.decisions.calledWork = true;
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich rufe besser an und sage Bescheid.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.blank, "...");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.phoneOutgoing, 1);
+        await Broken_Days.ƒS.Progress.delay(10);
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.surprised, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Hallo, Kamon Restaurant, was kann ich für Sie tun?");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo Takashi? Ich bin es " + Broken_Days.dataForSave.nameProtagonist + ", ich habe ein Problem...");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Meine kleine Schwester Hanna ist verschwunden und ich habe keine Ahnung wo sie ist.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Als ich aufgewacht bin war sie einfach weg und ihr Telefon ist ausgeschaltet.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich muss sie suchen, ich weiß deshalb nicht ob ich zur Arbeit kommen kann.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Oh nein, das ist ja schrecklich!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Ich werde für dich übernehmen, das ist kein Problem. Und du kannst dich um deine Schwester kümmern.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Heute ist Montag, es wird bestimmt wieder nicht viel los sein, mach dir also keine Sorgen.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Ich wünsche dir viel Glück bei der Suche und hoffe du findest sie bald, wenn du Hilfe brauchst melde dich einfach bei mir.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Danke Takashi, du hast was gut bei mir. Ich werde versuchen sie zu finden...");
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.phoneTurnedOff, 1);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.phoneTurnedOff, 0, 3);
+        await Broken_Days.ƒS.Progress.delay(3);
+    }
+    Broken_Days.CallWorkDecision = CallWorkDecision;
 })(Broken_Days || (Broken_Days = {}));
 var Broken_Days;
 (function (Broken_Days) {
@@ -761,7 +860,7 @@ var Broken_Days;
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.urbanAmbience, 0, 1);
         switch (nextLocation) {
             case nextLocationAnswers.iSayNeighbour:
-                await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich gehe zu meiner Nachbarin.");
+                await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich gehe zu Etsuko.");
                 await Broken_Days.trainTransition();
                 return "Neighbour";
             case nextLocationAnswers.iSaySchool:
@@ -769,7 +868,7 @@ var Broken_Days;
                 await Broken_Days.trainTransition();
                 return "School";
             case nextLocationAnswers.iSayFriend:
-                await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich gehe zu Hannas Freundin.");
+                await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich gehe zu Hannas Freundin Kana.");
                 await Broken_Days.trainTransition();
                 return "Friend";
             case "Waschsalon":
@@ -813,6 +912,9 @@ var Broken_Days;
         await Broken_Days.ƒS.update(Broken_Days.transitions.puzzle.duration, Broken_Days.transitions.puzzle.alpha, Broken_Days.transitions.puzzle.edge);
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
+        if (Broken_Days.dataForSave.daysPassed == 0 && !Broken_Days.dataForSave.decisions.calledWork) {
+            await TakashisCall();
+        }
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Mhh, es ist schon Mittag. Wo soll ich als nächstes suchen?");
     }
     async function EveningRoutine() {
@@ -822,6 +924,31 @@ var Broken_Days;
         await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
         await Broken_Days.ƒS.update(1);
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Der Tag neigt sich dem Ende zu... Wo soll ich jetzt noch suchen?");
+    }
+    async function TakashisCall() {
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.phoneVibrate, 1, false);
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.surprised, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Oh, wer ruft mich denn jetzt an, könnte das Hanna sein?");
+        await Broken_Days.ƒS.Progress.delay(4);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo?");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, Broken_Days.dataForSave.nameProtagonist + "?! Wo bist du denn? Du hättest doch schon längst bei der Arbeit sein müssen!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Oh, Takashi!? Es tut mir leid, ich habe vergessen anzurufen...");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Meine kleine Schwester ist verschwunden und ich kann sie nicht erreichen!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich versuche sie gerade zu finden...");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Oh, das tut mir natürlich leid, aber du hättest dich auch einfach kurz melden können und Bescheid geben!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Wir haben uns schon Sorgen gemacht, dass dir etwas passiert ist!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Ich weiß, ich weiß, es tut mir wirklich leid, aber ich hatte vorhin keinen Kopf dafür, ich muss Hanna schnellstmöglich finden!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Ok, ich werde dich jetzt nicht weiter aufhalten, ich wünsche dir viel Glück bei der Suche!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Takashi, "Bitte melde dich wenn du sie gefunden hast.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Danke Takashi...");
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        Broken_Days.ƒS.Sound.play(Broken_Days.sound.phoneTurnedOff, 1);
+        Broken_Days.ƒS.Sound.fade(Broken_Days.sound.phoneTurnedOff, 0, 3);
+        await Broken_Days.ƒS.Progress.delay(3);
     }
     function updateLocationAnswers(_nextLocationAnswers) {
         if (Broken_Days.dataForSave.locations.laundryUnlocked)
@@ -854,7 +981,6 @@ var Broken_Days;
                 await EveningRoutine();
                 break;
         }
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo Nachbar, wie gehts?");
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
         return Broken_Days.hndNextLocation();
     }
@@ -862,18 +988,47 @@ var Broken_Days;
     async function MorningRoutine() {
         await Broken_Days.ƒS.Location.show(Broken_Days.locations.neighbour.morning);
         Broken_Days.hndTransition();
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Etsuko scheint nicht hier zu sein. Ich sollte vielleicht später nochmal vorbeischauen.");
     }
     async function AfternoonRoutine() {
         // --> unlock laundry
-        if (!Broken_Days.dataForSave.locations.laundryUnlocked)
-            Broken_Days.dataForSave.locations.laundryUnlocked = true;
         await Broken_Days.ƒS.Location.show(Broken_Days.locations.neighbour.afternoon);
         Broken_Days.hndTransition();
-        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Oh hi mark");
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.Etsuko, Broken_Days.characters.Etsuko.pose.neutral, Broken_Days.ƒS.positionPercent(75, 100));
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Etsuko, "Oh, hallo " + Broken_Days.dataForSave.nameProtagonist + "!");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Etsuko, "Wie schön dich zu sehen! Ich habe gerade etwas für dich gebacken.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hallo Etsuko... Das ist sehr nett von dir, aber ich habe leider keine Zeit.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Hanna ist verschwunden, ich kann sie nicht erreichen und finde sie nirgends.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Weißt du vielleicht, wo sie sein könnte?");
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.Etsuko);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.Etsuko, Broken_Days.characters.Etsuko.pose.surprised, Broken_Days.ƒS.positionPercent(75, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Etsuko, "Oh nein, das ist ja schrecklich! Das tut mir sehr leid, aber ich habe sie auch nicht gesehen.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Etsuko, "Ich hoffe es geht ihr gut, sie hat in letzter Zeit einen sehr kränklichen Eindruck gemacht...");
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.surprised, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Was meinst du damit? Das ist mir gar nicht aufgefallen?!");
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.Etsuko);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.Etsuko, Broken_Days.characters.Etsuko.pose.sad, Broken_Days.ƒS.positionPercent(75, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Etsuko, "Mhh, darüber solltest du vielleicht besser mit ihr sprechen...");
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.Etsuko);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.Etsuko, Broken_Days.characters.Etsuko.pose.optimistic, Broken_Days.ƒS.positionPercent(75, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Etsuko, "Hast du schon im Waschsalon nach ihr geschaut? Ich glaube sie wollte eure Wäsche waschen.");
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Etsuko, "Mach dir bitte keine all zu großen Sorgen, so wie ich sie kenne wird sie wahrscheinlich einfach vergessen haben dir Bescheid zu geben.");
+        Broken_Days.ƒS.Character.hide(Broken_Days.characters.mainCharacter);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.mainCharacter, Broken_Days.characters.mainCharacter.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Das ist eine gute Idee. Danke für deine Hilfe Etsuko, ich werde dort mal nachsehen.");
+        if (!Broken_Days.dataForSave.locations.laundryUnlocked)
+            Broken_Days.dataForSave.locations.laundryUnlocked = true;
     }
     async function EveningRoutine() {
         await Broken_Days.ƒS.Location.show(Broken_Days.locations.neighbour.evening);
         Broken_Days.hndTransition();
+        await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, "Etsuko scheint nicht hier zu sein. Ich sollte vielleicht später nochmal vorbeischauen.");
     }
 })(Broken_Days || (Broken_Days = {}));
 var Broken_Days;
@@ -907,6 +1062,8 @@ var Broken_Days;
             await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.mainCharacter, text[i]);
         }
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.kotoTheme, 0, 1);
+        await Broken_Days.fadeScene();
+        return "LocationDecision";
     }
     Broken_Days.NewDay = NewDay;
 })(Broken_Days || (Broken_Days = {}));

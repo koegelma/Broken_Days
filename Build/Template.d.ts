@@ -11,6 +11,9 @@ declare namespace Broken_Days {
         DayTime: DayTime;
         daysPassed: number;
         dayTimeIndex: number;
+        decisions: {
+            calledWork: boolean;
+        };
         locations: {
             laundryUnlocked: boolean;
             onsenUnlocked: boolean;
@@ -62,6 +65,11 @@ declare namespace Broken_Days {
             origin: ƒ.ORIGIN2D;
             pose: {};
         };
+        blank: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {};
+        };
         mainCharacter: {
             name: string;
             origin: ƒ.ORIGIN2D;
@@ -75,6 +83,26 @@ declare namespace Broken_Days {
                 tired: string;
                 asleep: string;
             };
+        };
+        Takashi: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {};
+        };
+        Etsuko: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                neutral: string;
+                optimistic: string;
+                sad: string;
+                surprised: string;
+            };
+        };
+        Kana: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {};
         };
     };
     function UpdateName(): Promise<void>;
@@ -258,6 +286,9 @@ declare namespace Broken_Days {
     let sound: {
         kotoTheme: string;
         yawn: string;
+        phoneVibrate: string;
+        phoneOutgoing: string;
+        phoneTurnedOff: string;
         trainAmbience: string;
         templeAmbience: string;
         urbanAmbience: string;
@@ -284,6 +315,7 @@ declare namespace Broken_Days {
 }
 declare namespace Broken_Days {
     function Introduction(): ƒS.SceneReturn;
+    function CallWorkDecision(): Promise<void>;
 }
 declare namespace Broken_Days {
     function Laundry(): ƒS.SceneReturn;

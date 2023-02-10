@@ -9,6 +9,12 @@ namespace Broken_Days {
             pose: {}
         },
 
+        blank: {
+            name: " ",
+            origin: ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {}
+        },
+
         mainCharacter: {
             name: dataForSave.nameProtagonist,
             origin: ƒS.ORIGIN.BOTTOMCENTER,   // Ankerpunkt: Anfangsposition im Canvas, kann in der Szene umpositioniert werden
@@ -21,6 +27,31 @@ namespace Broken_Days {
                 surprised: "./Images/Characters/Main/Surprised.png",
                 tired: "./Images/Characters/Main/Tired.png",
                 asleep: "./Images/Characters/Main/Asleep.png"
+            }
+        },
+
+        Takashi: {
+            name: "Takashi",
+            origin: ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+            }
+        },
+
+        Etsuko: {
+            name: "Etsuko",
+            origin: ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                neutral: "./Images/Characters/Etsuko/Neutral.png",
+                optimistic: "./Images/Characters/Etsuko/Optimistic.png",
+                sad: "./Images/Characters/Etsuko/Sad.png",
+                surprised: "./Images/Characters/Etsuko/Surprised.png"
+            }
+        },
+
+        Kana: {
+            name: "Kana",
+            origin: ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
             }
         }
         /* ,

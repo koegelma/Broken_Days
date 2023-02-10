@@ -6,6 +6,9 @@ namespace Broken_Days {
 
         // SFX
         yawn: "./Audio/HumanYawn_S08HU.2522.wav", // source: prosoundeffects.com
+        phoneVibrate: "./Audio/CellPhoneVibrate_BWU.554.wav", // source: prosoundeffects.com
+        phoneOutgoing: "./Audio/CellPhoneRing_short.wav", // source: prosoundeffects.com
+        phoneTurnedOff: "./Audio/Phone,Speaker,OffTheHook.wav", // source: prosoundeffects.com
 
         // ambience
         trainAmbience: "./Audio/TRAIN_MELBOURNE_PASSENGER_XTRAPOLIS_100_INTERIOR_2_STOPS_STEREO_.wav", // source: prosoundeffects.com
