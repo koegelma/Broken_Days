@@ -1,5 +1,5 @@
 namespace Broken_Days {
-    // sounds
+    
     export let sound = {
         // themes
         kotoTheme: "./Audio/391828__zagi2__koto-theme.wav", // source: https://freesound.org/people/zagi2/sounds/391828/

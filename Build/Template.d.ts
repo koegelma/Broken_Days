@@ -22,6 +22,11 @@ declare namespace Broken_Days {
             psychologistUnlocked: boolean;
             templeUnlocked: boolean;
         };
+        puzzlePieces: {
+            puzzle1Unlocked: boolean;
+            puzzle2Unlocked: boolean;
+            puzzle3Unlocked: boolean;
+        };
     };
     function UpdateDayTime(): Promise<void>;
     function showCredits(): void;
@@ -60,17 +65,17 @@ declare namespace Broken_Days {
 }
 declare namespace Broken_Days {
     let characters: {
-        narrator: {
+        Narrator: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {};
         };
-        blank: {
+        Blank: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {};
         };
-        mainCharacter: {
+        Protagonist: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
@@ -82,6 +87,14 @@ declare namespace Broken_Days {
                 surprised: string;
                 tired: string;
                 asleep: string;
+            };
+        };
+        Hanna: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                neutral: string;
+                happy: string;
             };
         };
         Takashi: {
@@ -102,13 +115,45 @@ declare namespace Broken_Days {
         Kana: {
             name: string;
             origin: ƒ.ORIGIN2D;
-            pose: {};
+            pose: {
+                neutral: string;
+                surprised: string;
+            };
+        };
+        Saito: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                neutral: string;
+                sad: string;
+            };
+        };
+        Yamato: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                neutral: string;
+            };
+        };
+        Kenzo: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                happy: string;
+                neutral: string;
+                surprised: string;
+                sad: string;
+            };
+        };
+        DrKimura: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                neutral: string;
+            };
         };
     };
     function UpdateName(): Promise<void>;
-}
-declare namespace Broken_Days {
-    function Inventory_Test(): ƒS.SceneReturn;
 }
 declare namespace Broken_Days {
     let locations: {

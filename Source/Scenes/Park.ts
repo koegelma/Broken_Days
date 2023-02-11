@@ -16,7 +16,7 @@ namespace Broken_Days {
                 break;
         }
 
-        await ƒS.Speech.tell(characters.mainCharacter, "Hallo Park, wie gehts?");
+        await ƒS.Speech.tell(characters.Protagonist, "Hallo Park, wie gehts?");
 
         ƒS.Sound.fade(sound.urbanAmbience, 0, 1);
 

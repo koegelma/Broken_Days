@@ -30,9 +30,6 @@ namespace Broken_Days {
         T016: "Oder sie ist bei ihrer Freundin Kana?",
         T017: "Ich sollte mich jetzt besser schnell auf die Suche machen."
 
-        // -> Hanna suchen
-        // -> Im Restaurant Bescheid geben, dass ich nicht zur Arbeit kommen kann - Hinweis auf Wochentag
-        // -> 3 Möglichkeiten: Bei Nachbarin, in der Schule, bei ihrer Freundin
       },
       blank: {
         T001: "..."
@@ -40,33 +37,28 @@ namespace Broken_Days {
 
     };
 
-    //ƒS.Sound.play();
-
     // Bedroom
     await ƒS.Location.show(locations.room.day);
     await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
 
-    await ƒS.Speech.tell(characters.narrator, text.Narrator.T001);
-    await ƒS.Speech.tell(characters.narrator, text.Narrator.T002);
-    await ƒS.Speech.tell(characters.narrator, text.Narrator.T003);
-    await ƒS.Speech.tell(characters.narrator, text.Narrator.T004);
+    await ƒS.Speech.tell(characters.Narrator, text.Narrator.T001);
+    await ƒS.Speech.tell(characters.Narrator, text.Narrator.T002);
+    await ƒS.Speech.tell(characters.Narrator, text.Narrator.T003);
+    await ƒS.Speech.tell(characters.Narrator, text.Narrator.T004);
 
     dataForSave.nameProtagonist = await ƒS.Speech.getInput();
     await ƒS.update(1);
     await UpdateName();
-    await ƒS.Speech.tell(characters.narrator, `Hallo ${characters.mainCharacter.name}!`);
+    await ƒS.Speech.tell(characters.Narrator, `Hallo ${characters.Protagonist.name}!`);
 
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.neutral, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
-    ƒS.Character.hide(characters.mainCharacter);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.happy, ƒS.positionPercent(25, 100));
+    ƒS.Character.hide(characters.Protagonist);
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.happy, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T001);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T002);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T003);
-
-    //ƒS.Speech.clear(); // blendet Text aus, Textfeld ist noch da
-    //ƒS.Speech.hide(); 
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T001);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T002);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T003);
 
 
     await ƒS.update();
@@ -75,35 +67,35 @@ namespace Broken_Days {
 
     // Hanna's Bedroom
     await ƒS.Location.show(locations.hannaBedroom.day);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.happy, ƒS.positionPercent(25, 100));
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.happy, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
-    ƒS.Character.hide(characters.mainCharacter);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.surprised, ƒS.positionPercent(25, 100));
+    ƒS.Character.hide(characters.Protagonist);
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.surprised, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T004);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T005);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T004);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T005);
 
     await fadeScene();
 
     // Kitchen
     await ƒS.Location.show(locations.kitchen.day);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.happy, ƒS.positionPercent(25, 100));
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.happy, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
-    ƒS.Character.hide(characters.mainCharacter);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.shoked, ƒS.positionPercent(25, 100));
+    ƒS.Character.hide(characters.Protagonist);
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.shoked, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T006);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T007);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T008);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T009);
-    await ƒS.Speech.tell(characters.blank, text.blank.T001);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T006);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T007);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T008);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T009);
+    await ƒS.Speech.tell(characters.Blank, text.blank.T001);
     ƒS.Sound.fade(sound.phoneTurnedOff, 0, 4);
     await ƒS.Progress.delay(4);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T010);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T011);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T012);
-    ƒS.Character.hide(characters.mainCharacter);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.angry, ƒS.positionPercent(25, 100));
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T010);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T011);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T012);
+    ƒS.Character.hide(characters.Protagonist);
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.angry, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
 
     let callWorkAnswers = {
@@ -118,16 +110,16 @@ namespace Broken_Days {
         await CallWorkDecision();
         break;
       case callWorkAnswers.iSayNo:
-        await ƒS.Speech.tell(characters.mainCharacter, "Ich habe jetzt keine Zeit dafür, ich muss sie finden!");
-        await ƒS.Speech.tell(characters.mainCharacter, "Heute ist Montag, da ist normal eh nicht viel los. Es wird bestimmt kein Problem sein, wenn ich später komme.");
+        await ƒS.Speech.tell(characters.Protagonist, "Ich habe jetzt keine Zeit dafür, ich muss sie finden!");
+        await ƒS.Speech.tell(characters.Protagonist, "Heute ist Montag, da ist normal eh nicht viel los. Es wird bestimmt kein Problem sein, wenn ich später komme.");
         break;
     }
 
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T013);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T014);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T015);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T016);
-    await ƒS.Speech.tell(characters.mainCharacter, text.mainCharacter.T017);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T013);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T014);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T015);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T016);
+    await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T017);
 
     ƒS.Sound.fade(sound.kotoTheme, 0, 1);
 
@@ -137,26 +129,25 @@ namespace Broken_Days {
 
   export async function CallWorkDecision(): Promise<void> {
     dataForSave.decisions.calledWork = true;
-    await ƒS.Speech.tell(characters.mainCharacter, "Ich rufe besser an und sage Bescheid.");
-    await ƒS.Speech.tell(characters.blank, "...");
+    await ƒS.Speech.tell(characters.Protagonist, "Ich rufe besser an und sage Bescheid.");
+    await ƒS.Speech.tell(characters.Blank, "...");
     ƒS.Sound.play(sound.phoneOutgoing, 1);
     await ƒS.Progress.delay(10);
-    ƒS.Character.hide(characters.mainCharacter);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.surprised, ƒS.positionPercent(25, 100));
+    ƒS.Character.hide(characters.Protagonist);
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.surprised, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
     await ƒS.Speech.tell(characters.Takashi, "Hallo, Kamon Restaurant, was kann ich für Sie tun?");
-    await ƒS.Speech.tell(characters.mainCharacter, "Hallo Takashi? Ich bin es " + dataForSave.nameProtagonist + ", ich habe ein Problem...");
-    await ƒS.Speech.tell(characters.mainCharacter, "Meine kleine Schwester Hanna ist verschwunden und ich habe keine Ahnung wo sie ist.");
-    await ƒS.Speech.tell(characters.mainCharacter, "Als ich aufgewacht bin war sie einfach weg und ihr Telefon ist ausgeschaltet.");
-    await ƒS.Speech.tell(characters.mainCharacter, "Ich muss sie suchen, ich weiß deshalb nicht ob ich zur Arbeit kommen kann.");
+    await ƒS.Speech.tell(characters.Protagonist, "Hallo Takashi? Ich bin es " + dataForSave.nameProtagonist + ", ich habe ein Problem...");
+    await ƒS.Speech.tell(characters.Protagonist, "Meine kleine Schwester Hanna ist verschwunden und ich habe keine Ahnung wo sie ist.");
+    await ƒS.Speech.tell(characters.Protagonist, "Als ich aufgewacht bin war sie einfach weg und ihr Telefon ist ausgeschaltet.");
+    await ƒS.Speech.tell(characters.Protagonist, "Ich muss sie suchen, ich weiß deshalb nicht ob ich zur Arbeit kommen kann.");
     await ƒS.Speech.tell(characters.Takashi, "Oh nein, das ist ja schrecklich!");
     await ƒS.Speech.tell(characters.Takashi, "Ich werde für dich übernehmen, das ist kein Problem. Und du kannst dich um deine Schwester kümmern.");
     await ƒS.Speech.tell(characters.Takashi, "Heute ist Montag, es wird bestimmt wieder nicht viel los sein, mach dir also keine Sorgen.");
     await ƒS.Speech.tell(characters.Takashi, "Ich wünsche dir viel Glück bei der Suche und hoffe du findest sie bald, wenn du Hilfe brauchst melde dich einfach bei mir.");
-    await ƒS.Speech.tell(characters.mainCharacter, "Danke Takashi, du hast was gut bei mir. Ich werde versuchen sie zu finden...");
+    await ƒS.Speech.tell(characters.Protagonist, "Danke Takashi, du hast was gut bei mir. Ich werde versuchen sie zu finden...");
     ƒS.Sound.play(sound.phoneTurnedOff, 1);
     ƒS.Sound.fade(sound.phoneTurnedOff, 0, 3);
     await ƒS.Progress.delay(3);
   }
-
 }

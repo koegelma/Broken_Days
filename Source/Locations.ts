@@ -108,7 +108,7 @@ namespace Broken_Days {
                 background: "./Images/Backgrounds/Friend_Evening.png"
             }
         },
-        // laundromat
+        // laundry
         laundry: {
             name: "Laundry",
             background: "./Images/Backgrounds/Laundromat.png"
@@ -180,7 +180,7 @@ namespace Broken_Days {
                 background: "./Images/Backgrounds/Temple_Evening.png"
             }
         },
-        // Restaurant
+        // restaurant
         restaurant: {
             name: "Restaurant",
             background: "./Images/Backgrounds/Restaurant.png"

@@ -16,7 +16,7 @@ namespace Broken_Days {
                 break;
         }
 
-        await ƒS.Speech.tell(characters.mainCharacter, "Hallo Onsen, wie gehts?");
+        await ƒS.Speech.tell(characters.Protagonist, "Hallo Onsen, wie gehts?");
 
         ƒS.Sound.fade(sound.onsenAmbience, 0, 1);
 
@@ -36,7 +36,7 @@ namespace Broken_Days {
     }
 
     async function EveningRoutine(): Promise<void> {
-        // --> unlock psychologist
+        // --> recieve puzzle piece
         await ƒS.Location.show(locations.onsen.evening);
         hndTransition();
     }

@@ -26,6 +26,11 @@ namespace Broken_Days {
       parkUnlocked: false,
       psychologistUnlocked: false,
       templeUnlocked: false
+    },
+    puzzlePieces: {
+      puzzle1Unlocked: false,
+      puzzle2Unlocked: false,
+      puzzle3Unlocked: false
     }
   };
 
@@ -73,15 +78,15 @@ namespace Broken_Days {
   export async function trainTransition(): Promise<void> {
     await fadeScene();
     await ƒS.Location.show(locations.train);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(75, 100));
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.neutral, ƒS.positionPercent(75, 100));
     ƒS.update();
     ƒS.Sound.play(sound.trainAmbience, 1);
     await ƒS.Progress.delay(5);
-    ƒS.Character.hide(characters.mainCharacter);
-    ƒS.Character.animate(characters.mainCharacter, characters.mainCharacter.pose.surprised, getTrainAnimation());
+    ƒS.Character.hide(characters.Protagonist);
+    ƒS.Character.animate(characters.Protagonist, characters.Protagonist.pose.surprised, getTrainAnimation());
     await ƒS.Progress.delay(3);
-    ƒS.Character.hide(characters.mainCharacter);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(73, 100));
+    ƒS.Character.hide(characters.Protagonist);
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.neutral, ƒS.positionPercent(73, 100));
     ƒS.update(1);
     await ƒS.Progress.delay(2);
     ƒS.Sound.fade(sound.trainAmbience, 0, 1);
@@ -90,7 +95,7 @@ namespace Broken_Days {
 
   export async function hndTransition(): Promise<void> {
     await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
-    await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.neutral, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
   }
 
@@ -103,13 +108,13 @@ namespace Broken_Days {
 
   export async function hndNextLocation(): Promise<string> {
     if (dataForSave.DayTime != DayTime.EVENING) {
-      await ƒS.Speech.tell(characters.mainCharacter, "Ich sollte meine Suche jetzt besser fortsetzen.");
+      await ƒS.Speech.tell(characters.Protagonist, "Ich sollte meine Suche jetzt besser fortsetzen.");
       UpdateDayTime();
       await fadeScene();
       return "LocationDecision";
     }
     // Evening
-    await ƒS.Speech.tell(characters.mainCharacter, "Es ist schon so spät... Ich sollte jetzt besser nach Hause gehen und dort schauen.");
+    await ƒS.Speech.tell(characters.Protagonist, "Es ist schon so spät... Ich sollte jetzt besser nach Hause gehen und dort schauen.");
     UpdateDayTime();
     await fadeScene();
     return "EndDay";
@@ -214,10 +219,7 @@ namespace Broken_Days {
     gameMenu = ƒS.Menu.create(inGameMenuButttons, buttonFunctionalities, "gameMenuCSSclass");
     buttonFunctionalities("Close");
     let scenes: ƒS.Scenes = [
-      //{ scene: Scene, name: "Scene" },
       { scene: Introduction, name: "Introduction" },
-      //{ scene: Inventory_Test, name: "Inventory_Test" }
-      //{id: "", scene: Scene, name: "Scene" , next:""}, --> next mit id ansprechen
       { id: "LocationDecision", scene: LocationDecision, name: "LocationDecision" },
       { id: "Neighbour", scene: Neighbour, name: "Neighbour" },
       { id: "School", scene: School, name: "School" },

@@ -6,9 +6,9 @@ namespace Broken_Days {
 
         await ƒS.Location.show(locations.restaurant);
         await ƒS.update(transitions.puzzle.duration, transitions.puzzle.alpha, transitions.puzzle.edge);
-        await ƒS.Character.show(characters.mainCharacter, characters.mainCharacter.pose.neutral, ƒS.positionPercent(25, 100));
+        await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.neutral, ƒS.positionPercent(25, 100));
         await ƒS.update(1);
-        await ƒS.Speech.tell(characters.mainCharacter, "Hallo Restaurant, wie gehts?");
+        await ƒS.Speech.tell(characters.Protagonist, "Hallo Restaurant, wie gehts?");
 
         ƒS.Sound.fade(sound.restaurantAmbience, 0, 1);
 

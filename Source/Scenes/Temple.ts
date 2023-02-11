@@ -16,9 +16,10 @@ namespace Broken_Days {
                 break;
         }
 
-        await ƒS.Speech.tell(characters.mainCharacter, "Hallo Tempel, wie gehts?");
+        await ƒS.Speech.tell(characters.Protagonist, "Hallo Tempel, wie gehts?");
 
         ƒS.Sound.fade(sound.templeAmbience, 0, 1);
+        
         return hndNextLocation();
     }
 
