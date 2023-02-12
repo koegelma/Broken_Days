@@ -1125,9 +1125,23 @@ var Broken_Days;
 (function (Broken_Days) {
     async function NewDay() {
         console.log("NewDay Scene starting");
-        let textDayOne = [
+        let textDayOneRoom = [
             "Oh man, das hat sich alles wie ein schlechter Traum angefühlt...",
-            "Vielleicht war es ja wirklich nur ein Traum?"
+            "Vielleicht war es ja wirklich nur ein Traum?",
+            "Ich sollte schnell  nach Hanna schauen"
+        ];
+        let textDayOneHannaRoom = [
+            "Hanna? Hanna? Bist du da?",
+            "Hanna? Bist du da?",
+            "Hanna? Bist du da?"
+        ];
+        let textDayTwoRoom = [
+            "",
+            ""
+        ];
+        let textDayTwoHannaRoom = [
+            "",
+            ""
         ];
         /* let textDayOne = {
             mainCharacter: {
@@ -1142,7 +1156,24 @@ var Broken_Days;
         await Broken_Days.ƒS.update(1);
         let text;
         if (Broken_Days.dataForSave.daysPassed == 1) {
-            text = textDayOne;
+            text = textDayOneRoom;
+        }
+        else if (Broken_Days.dataForSave.daysPassed == 2) {
+            text = textDayTwoRoom;
+        }
+        for (let i = 0; i < text.length; i++) {
+            await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, text[i]);
+        }
+        await Broken_Days.fadeScene();
+        // hannas room
+        await Broken_Days.ƒS.Location.show(Broken_Days.locations.hannaBedroom.day);
+        await Broken_Days.ƒS.Character.show(Broken_Days.characters.Protagonist, Broken_Days.characters.Protagonist.pose.neutral, Broken_Days.ƒS.positionPercent(25, 100));
+        await Broken_Days.ƒS.update(1);
+        if (Broken_Days.dataForSave.daysPassed == 1) {
+            text = textDayOneHannaRoom;
+        }
+        else if (Broken_Days.dataForSave.daysPassed == 2) {
+            text = textDayTwoHannaRoom;
         }
         for (let i = 0; i < text.length; i++) {
             await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, text[i]);

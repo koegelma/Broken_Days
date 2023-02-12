@@ -1,5 +1,5 @@
 namespace Broken_Days {
-    
+
     export let sound = {
         // themes
         kotoTheme: "./Audio/391828__zagi2__koto-theme.wav", // source: https://freesound.org/people/zagi2/sounds/391828/
@@ -17,6 +17,7 @@ namespace Broken_Days {
         landryAmbience: "./Audio/AMB_INT_Laundry_Washer_Running_BTM00033.mp3", // source: prosoundeffects.com
         schoolAmbience: "./Audio/HighSchoolHallway_BWU.12.wav", // source: prosoundeffects.com
         onsenAmbience: "./Audio/SwimmingPoolAmb_S08SP.864.wav", // source: prosoundeffects.com
-        restaurantAmbience: "./Audio/RestaurantCrowd_S08AM.55.wav" // source: prosoundeffects.com
+        restaurantAmbience: "./Audio/RestaurantCrowd_S08AM.55.wav", // source: prosoundeffects.com
+        finalAmbience: "./Audio/Ambience_Blue_Mountains_Early_morning01_Stereo.wav" // source: prosoundeffects.com
     };
 }

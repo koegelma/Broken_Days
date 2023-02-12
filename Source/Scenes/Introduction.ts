@@ -45,21 +45,21 @@ namespace Broken_Days {
     await ƒS.Speech.tell(characters.Narrator, text.Narrator.T002);
     await ƒS.Speech.tell(characters.Narrator, text.Narrator.T003);
     await ƒS.Speech.tell(characters.Narrator, text.Narrator.T004);
-
+    
     dataForSave.nameProtagonist = await ƒS.Speech.getInput();
     await ƒS.update(1);
-    await UpdateName();
+    UpdateName();
     await ƒS.Speech.tell(characters.Narrator, `Hallo ${characters.Protagonist.name}!`);
-
+    
     await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.neutral, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
     ƒS.Character.hide(characters.Protagonist);
     await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.happy, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
+    ƒS.Sound.fade(sound.yawn, 0, 2);
     await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T001);
     await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T002);
     await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T003);
-
 
     await ƒS.update();
 
@@ -82,7 +82,7 @@ namespace Broken_Days {
     await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.happy, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
     ƒS.Character.hide(characters.Protagonist);
-    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.shoked, ƒS.positionPercent(25, 100));
+    await ƒS.Character.show(characters.Protagonist, characters.Protagonist.pose.shocked, ƒS.positionPercent(25, 100));
     await ƒS.update(1);
     await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T006);
     await ƒS.Speech.tell(characters.Protagonist, text.mainCharacter.T007);

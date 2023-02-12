@@ -22,7 +22,7 @@ namespace Broken_Days {
                 happy: "./Images/Characters/Protagonist/Happy.png",
                 neutral: "./Images/Characters/Protagonist/Neutral.png",
                 sad: "./Images/Characters/Protagonist/Sad.png",
-                shoked: "./Images/Characters/Protagonist/Shocked.png",
+                shocked: "./Images/Characters/Protagonist/Shocked.png",
                 surprised: "./Images/Characters/Protagonist/Surprised.png",
                 tired: "./Images/Characters/Protagonist/Tired.png",
                 asleep: "./Images/Characters/Protagonist/Asleep.png"
@@ -42,6 +42,7 @@ namespace Broken_Days {
             name: "Takashi",
             origin: ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
+                neutral: "./Images/Characters/Takashi/Neutral.png"
             }
         },
 
@@ -102,7 +103,7 @@ namespace Broken_Days {
         }
     };
 
-    export async function UpdateName(): Promise<void> {
+    export function UpdateName(): void {
         characters.Protagonist.name = dataForSave.nameProtagonist;
     }
 }

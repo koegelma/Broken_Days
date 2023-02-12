@@ -43,12 +43,13 @@ namespace Broken_Days {
         await ƒS.Speech.tell(characters.Protagonist, "Hanna scheint nicht hier zu sein...");
         await ƒS.Speech.tell(characters.Blank, "...");
         await ƒS.Character.show(characters.Kenzo, characters.Kenzo.pose.happy, ƒS.positionPercent(75, 100));
+        await ƒS.update(1);
         await ƒS.Speech.tell(characters.Kenzo, dataForSave.nameProtagonist + "!");
         await ƒS.Speech.tell(characters.Kenzo, "Man, hab' ich dich schon lange nicht mehr gesehen!");
         await ƒS.Speech.tell(characters.Kenzo, "Wie geht es dir? Arbeitest du noch immer im Kamon Restaurant als Bedienung?");
         await ƒS.Speech.tell(characters.Protagonist, "Kenzo?!");
         await ƒS.Speech.tell(characters.Protagonist, "Ja, ich arbeite noch immer dort.");
-        await ƒS.Speech.tell(characters.Kenzo, "Dann hat sich ja nicht viel verändert! Ich habe mein Studium in Tokyo beendet und bin gerade wieder in Stadt gezogen!");
+        await ƒS.Speech.tell(characters.Kenzo, "Dann hat sich ja nicht viel verändert! Ich habe mein Studium in Tokio beendet und bin gerade wieder in Stadt gezogen!");
         await ƒS.Speech.tell(characters.Kenzo, "Ich habe einen Job als Programmierer bei einer Firma hier bekommen.");
         await ƒS.Speech.tell(characters.Kenzo, "Ich habe mir außerdem eine Wohnung in der Nähe des Parks gemietet. Ich weiß noch wie wir als Kinder damals immer zusammen dort mit Hanna gespielt haben!");
         await ƒS.Speech.tell(characters.Kenzo, "Ich würde mich freuen, wenn du mal vorbeikommen würdest, du kannst Hanna auch gerne mitbringen!");

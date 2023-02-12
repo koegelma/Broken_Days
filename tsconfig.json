@@ -10,7 +10,7 @@
     // "declaration": true, /*                   Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     "sourceMap": true, /*                     Generates corresponding '.map' file. */
-    "outFile": "./Build/Template.js", // UMBENNEN!!!!!!!!!!!!!!!!!!!!/*        Concatenate and emit output to single file. */
+    "outFile": "./Build/BrokenDays.js", /*        Concatenate and emit output to single file. */
     // "outDir": "./Build",                         /* Redirect output structure to the directory. */
     // "sourceRoot": "./src/",
     // "rootDir": "./src/",                    /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
@@ -23,7 +23,7 @@
     /* -------------------- Strict Type-Checking Options */
     // ######## check if we should compile with strict=true
     "strict": false, /*                       Enable all strict type-checking options. */
-    "noImplicitAny": true, /*                 Raise error on expressions and declarations with an implied 'any' type. */
+    /*  "noImplicitAny": true, */ /*                 Raise error on expressions and declarations with an implied 'any' type. */
     //"strictNullChecks": true, /*              Enable strict null checks. */
     "strictFunctionTypes": true, /*           Enable strict checking of function types. */
     // "strictBindCallApply": true,        /* Enable strict 'bind', 'call', and 'apply' methods on functions. */

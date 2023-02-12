@@ -2,6 +2,23 @@ namespace Broken_Days {
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
 
+  export let despairMeter: HTMLElement;
+  export let despair: HTMLElement;
+
+  export function openMeter(): void {
+    if (despairMeter != null && despair != null) {
+      despairMeter.hidden = false;
+      despair.hidden = false;
+    }
+  }
+
+  export function closeMeter(): void {
+    if (despairMeter != null && despair != null) {
+      despairMeter.hidden = true;
+      despair.hidden = true;
+    }
+  }
+
   export enum DayTime {
     MORNING,
     AFTERNOON,
@@ -10,12 +27,13 @@ namespace Broken_Days {
 
   const dayTimes = [DayTime.MORNING, DayTime.AFTERNOON, DayTime.EVENING];
 
-
   export let dataForSave = {
     nameProtagonist: "",
     DayTime: DayTime.MORNING,
     daysPassed: 0,
     dayTimeIndex: 0,
+    despair: 0,
+    yourDespair: "0 Verzweiflung",
     decisions: {
       calledWork: false
     },
@@ -31,6 +49,10 @@ namespace Broken_Days {
       puzzle1Unlocked: false,
       puzzle2Unlocked: false,
       puzzle3Unlocked: false
+    },
+    endingDecisions: {
+      ending1: false,
+      ending2: false
     }
   };
 
@@ -39,13 +61,42 @@ namespace Broken_Days {
     if (dataForSave.dayTimeIndex === 0) {
       dataForSave.daysPassed++;
       console.log("New day! " + dataForSave.daysPassed + " days passed.");
+      increaseDespair(20);
     }
     dataForSave.DayTime = dayTimes[dataForSave.dayTimeIndex];
   }
 
+  export async function increaseDespair(_amount: number): Promise<void> {
+    dataForSave.despair += _amount;
+    if (dataForSave.despair > 100) dataForSave.despair = 100;
+    dataForSave.yourDespair = dataForSave.despair + " Verzweiflung";
+  }
+
+
+  export function decreaseDespair(_amount: number): void {
+    dataForSave.despair -= _amount;
+    if (dataForSave.despair < 0) dataForSave.despair = 0;
+    dataForSave.yourDespair = dataForSave.despair + " Verzweiflung";
+  }
+
+  export async function triggerBadEnding(): Promise<void> {
+    fadeScene(5);
+    await ƒS.Speech.tell(characters.Protagonist, "Das hat doch alles keinen Sinn mehr...");
+    await ƒS.Speech.tell(characters.Protagonist, "Ich werde Hanna nie finden...");
+    await ƒS.Speech.tell(characters.Narrator, "Du hast das Ende der Geschichte erreicht.");
+    await ƒS.Speech.tell(characters.Narrator, "Du hast Hanna nicht rechtzeitig gefunden und hast dich selbst aufgegeben.");
+    await ƒS.Progress.delay(9999);
+  }
+
   export function showCredits(): void {
-    ƒS.Text.setClass("credtis"); //addClass; setClass überschreibt
-    ƒS.Text.print("Credits here");
+    ƒS.Text.setClass("credits"); //addClass; setClass überschreibt
+    ƒS.Text.print(
+      "Credits: <br/> <br/>" +
+      "Character sheets: https://shatteredreality.itch.io/sutemo<br/> <br/>" +
+      "Backgrounds: https://noranekogames.itch.io/yumebackground <br/> <br/>" +
+      "Theme Music:https://freesound.org/people/zagi2/sounds/391828/ <br/> <br/>" +
+      "Additional Sounds: prosoundeffects.com <br/> <br/>"
+    );
   }
 
   export function getAnimation(): ƒS.AnimationDefinition {
@@ -120,35 +171,25 @@ namespace Broken_Days {
     return "EndDay";
   }
 
-  // items
-  export let items = {
-    handy: {
-      name: "Handy",
-      description: "Dein eigenes Handy, wow.",
-      image: "./Images/Items/phone.png",
-      static: true
-    },
-    laptop: {
-      name: "Laptop",
-      description: "Dein eigener Laptop, wow.",
-      image: "./Images/Items/laptop.png",
-      static: true
-    },
-    apple: {
-      name: "Apfel",
-      description: "Lecker, Apfel.",
-      image: "./Images/Items/apple.png"
+  export function allPiecesRecieved(): boolean {
+    if (dataForSave.puzzlePieces.puzzle1Unlocked && dataForSave.puzzlePieces.puzzle2Unlocked && dataForSave.puzzlePieces.puzzle3Unlocked) {
+      console.log("All pieces recieved! Piece1: " + dataForSave.puzzlePieces.puzzle1Unlocked + " Piece2: " + dataForSave.puzzlePieces.puzzle2Unlocked + " Piece3: " + dataForSave.puzzlePieces.puzzle3Unlocked);
+      return true;
     }
-  };
+    console.log("Not all pieces recieved!Piece1: " + dataForSave.puzzlePieces.puzzle1Unlocked + " Piece2: " + dataForSave.puzzlePieces.puzzle2Unlocked + " Piece3: " + dataForSave.puzzlePieces.puzzle3Unlocked);
+    return false;
+  }
 
   // menu
   // buttons
   let inGameMenuButttons = {
-    save: "Save",
-    load: "Load",
-    //volume
-    close: "Close",
-    credits: "Credits"
+    save: "Speichern",
+    load: "Laden",
+    volumeUp: "Vol +",
+    volumeDown: "Vol -",
+    credits: "Credits",
+    inventory: "Inventar",
+    close: "Schließen"
   };
 
   let gameMenu: ƒS.Menu;
@@ -164,17 +205,59 @@ namespace Broken_Days {
       case inGameMenuButttons.load:
         await ƒS.Progress.load();
         break;
-      case inGameMenuButttons.close:
-        gameMenu.close();
-        menuIsOpen = false;
+      case inGameMenuButttons.volumeUp:
+        VolumeUp();
+        break;
+      case inGameMenuButttons.volumeDown:
+        VolumeDown();
         break;
       case inGameMenuButttons.credits:
         showCredits();
         break;
+      case inGameMenuButttons.inventory:
+        await openInventory();
+        break;
+      case inGameMenuButttons.close:
+        gameMenu.close();
+        menuIsOpen = false;
+        break;
     }
   }
 
+  export async function openInventory(): Promise<void> {
+    const selectedItems: string[] = await ƒS.Inventory.open();
+    if (selectedItems && selectedItems.length > 0) {
+      selectedItems.forEach((s) => {
+        Object.keys(items).forEach((i) => {
+          const item = items[i];
+          if (item.name === s) {
+            showHannasMessages(item.number);
+            ƒS.Inventory.add(item);
+          }
+        });
+      });
+    }
+  }
 
+  let volume: number = 1;
+
+  export function VolumeUp(): void {
+    volume += 0.1;
+    if (volume > 2) {
+      volume = 2;
+      return;
+    }
+    ƒS.Sound.setMasterVolume(volume);
+  }
+
+  export function VolumeDown(): void {
+    volume -= 0.1;
+    if (volume < 0) {
+      volume = 0;
+      return;
+    }
+    ƒS.Sound.setMasterVolume(volume);
+  }
 
   // shortcuts fürs menu
   document.addEventListener("keydown", hndKeyPress);
@@ -192,7 +275,6 @@ namespace Broken_Days {
         await ƒS.Progress.load();
         break;
       case ƒ.KEYBOARD_CODE.M:
-        // menuIsOpen = !menuIsOpen;
         if (menuIsOpen) {
           console.log("Menu close");
           gameMenu.close();
@@ -206,18 +288,20 @@ namespace Broken_Days {
       case ƒ.KEYBOARD_CODE.I:
         inventoryIsOpen = !inventoryIsOpen;
         if (inventoryIsOpen) {
-          ƒS.Inventory.open();
-        } else {
-          ƒS.Inventory.close();
+          //ƒS.Inventory.open();
+          await openInventory();
+          break;
         }
-        break;
     }
   }
 
   window.addEventListener("load", start);
   function start(_event: Event): void {
-    gameMenu = ƒS.Menu.create(inGameMenuButttons, buttonFunctionalities, "gameMenuCSSclass");
+    despairMeter = document.getElementById("despair");
+    despair = document.getElementById("yourDespair");
+    gameMenu = ƒS.Menu.create(inGameMenuButttons, buttonFunctionalities, "gameMenu");
     buttonFunctionalities("Close");
+    ƒS.Sound.setMasterVolume(volume);
     let scenes: ƒS.Scenes = [
       { scene: Introduction, name: "Introduction" },
       { id: "LocationDecision", scene: LocationDecision, name: "LocationDecision" },
@@ -233,7 +317,6 @@ namespace Broken_Days {
       { id: "Psychologist", scene: Psychologist, name: "Psychologist" },
       { id: "Temple", scene: Temple, name: "Temple" },
       { id: "Restaurant", scene: Restaurant, name: "Restaurant" },
-      { id: "ApartmentEnd", scene: ApartmentEnd, name: "ApartmentEnd" },
       { id: "Ending", scene: Ending, name: "Ending" },
       { id: "Epilogue", scene: Epilogue, name: "Epilogue" }
     ];
@@ -244,6 +327,7 @@ namespace Broken_Days {
     // start the sequence
     ƒS.Progress.go(scenes);
     ƒS.Speech.hide();
+    closeMeter();
   }
 }
 

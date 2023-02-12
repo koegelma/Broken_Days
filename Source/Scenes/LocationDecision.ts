@@ -18,9 +18,6 @@ namespace Broken_Days {
         }
 
         let nextLocationAnswers = {
-            iSayNeighbour: "Nachbarin",
-            iSaySchool: "Schule",
-            iSayFriend: "Beste Freundin"
         };
 
         updateLocationAnswers(nextLocationAnswers);
@@ -30,17 +27,17 @@ namespace Broken_Days {
         ƒS.Sound.fade(sound.urbanAmbience, 0, 1);
 
         switch (nextLocation) {
-            case nextLocationAnswers.iSayNeighbour:
+            case "Nachbarin":
                 await ƒS.Speech.tell(characters.Protagonist, "Ich gehe zu Etsuko.");
                 await trainTransition();
                 return "Neighbour";
 
-            case nextLocationAnswers.iSaySchool:
+            case "Schule":
                 await ƒS.Speech.tell(characters.Protagonist, "Ich gehe zur Schule.");
                 await trainTransition();
                 return "School";
 
-            case nextLocationAnswers.iSayFriend:
+            case "Freundin":
                 await ƒS.Speech.tell(characters.Protagonist, "Ich gehe zu Hannas Freundin Kana.");
                 await trainTransition();
                 return "Friend";
@@ -134,9 +131,9 @@ namespace Broken_Days {
     }
 
     function updateLocationAnswers(_nextLocationAnswers: {
-        iSayNeighbour: string;
-        iSaySchool: string;
-        iSayFriend: string;
+        iSayNeighbour?: string;
+        iSaySchool?: string;
+        iSayFriend?: string;
         iSayLaundry?: string;
         iSayOnsen?: string;
         iSayShop?: string;
@@ -144,6 +141,12 @@ namespace Broken_Days {
         iSayPsychologist?: string;
         iSayTemple?: string;
     }): void {
+
+        if (!dataForSave.puzzlePieces.puzzle1Unlocked) _nextLocationAnswers.iSayNeighbour = "Nachbarin";
+
+        if (!dataForSave.puzzlePieces.puzzle2Unlocked) _nextLocationAnswers.iSaySchool = "Schule";
+
+        if (!dataForSave.puzzlePieces.puzzle3Unlocked) _nextLocationAnswers.iSayFriend = "Freundin";
 
         if (dataForSave.locations.laundryUnlocked) _nextLocationAnswers.iSayLaundry = "Waschsalon";
 
