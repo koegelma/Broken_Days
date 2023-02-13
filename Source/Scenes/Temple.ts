@@ -33,7 +33,6 @@ namespace Broken_Days {
         await ƒS.Speech.tell(characters.Protagonist, "Die Nachricht ist wirklich von Hanna!");
         await ƒS.Speech.tell(characters.Protagonist, "Aber was will sie mir damit nur sagen?");
         await ƒS.Speech.tell(characters.Protagonist, "Ich werde daraus nicht so wirklich schlau... Ich sollte einfach weiter suchen...");
-        // check if all puzzle pieces are collected -> restaurant scene
         ƒS.Sound.fade(sound.templeAmbience, 0, 1);
         closeMeter();
         if (allPiecesRecieved()) {
