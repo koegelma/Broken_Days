@@ -89,7 +89,7 @@ namespace Broken_Days {
   }
 
   export function showCredits(): void {
-    ƒS.Text.setClass("credits"); //addClass; setClass überschreibt
+    ƒS.Text.setClass("credits");
     ƒS.Text.print(
       "Credits: <br/> <br/>" +
       "Character sheets: https://shatteredreality.itch.io/sutemo<br/> <br/>" +
@@ -99,10 +99,10 @@ namespace Broken_Days {
     );
   }
 
-  export function getAnimation(): ƒS.AnimationDefinition {
+  export function getIntroAnimation(): ƒS.AnimationDefinition {
     return {
-      start: { translation: ƒS.positions.bottomleft, rotation: -20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("white", 0.3) },
-      end: { translation: ƒS.positions.bottomright, rotation: 20, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red") },
+      start: { translation: ƒS.positionPercent(150, 100) },
+      end: { translation: ƒS.positionPercent(75, 100) },
       duration: 1,
       playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
     };
@@ -288,7 +288,6 @@ namespace Broken_Days {
       case ƒ.KEYBOARD_CODE.I:
         inventoryIsOpen = !inventoryIsOpen;
         if (inventoryIsOpen) {
-          //ƒS.Inventory.open();
           await openInventory();
           break;
         }

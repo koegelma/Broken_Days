@@ -43,7 +43,7 @@ declare namespace Broken_Days {
     function decreaseDespair(_amount: number): void;
     function triggerBadEnding(): Promise<void>;
     function showCredits(): void;
-    function getAnimation(): ƒS.AnimationDefinition;
+    function getIntroAnimation(): ƒS.AnimationDefinition;
     function getTrainAnimation(): ƒS.AnimationDefinition;
     let transitions: {
         puzzle: {

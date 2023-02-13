@@ -42,8 +42,7 @@ namespace Broken_Days {
     async function FirstVisit(): Promise<void> {
         await ƒS.Speech.tell(characters.Protagonist, "Hanna scheint nicht hier zu sein...");
         await ƒS.Speech.tell(characters.Blank, "...");
-        await ƒS.Character.show(characters.Kenzo, characters.Kenzo.pose.happy, ƒS.positionPercent(75, 100));
-        await ƒS.update(1);
+        ƒS.Character.animate(characters.Kenzo, characters.Kenzo.pose.happy, getIntroAnimation());
         await ƒS.Speech.tell(characters.Kenzo, dataForSave.nameProtagonist + "!");
         await ƒS.Speech.tell(characters.Kenzo, "Man, hab' ich dich schon lange nicht mehr gesehen!");
         await ƒS.Speech.tell(characters.Kenzo, "Wie geht es dir? Arbeitest du noch immer im Kamon Restaurant als Bedienung?");

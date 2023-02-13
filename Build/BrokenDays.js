@@ -86,7 +86,7 @@ var Broken_Days;
     }
     Broken_Days.triggerBadEnding = triggerBadEnding;
     function showCredits() {
-        Broken_Days.ƒS.Text.setClass("credits"); //addClass; setClass überschreibt
+        Broken_Days.ƒS.Text.setClass("credits");
         Broken_Days.ƒS.Text.print("Credits: <br/> <br/>" +
             "Character sheets: https://shatteredreality.itch.io/sutemo<br/> <br/>" +
             "Backgrounds: https://noranekogames.itch.io/yumebackground <br/> <br/>" +
@@ -94,15 +94,15 @@ var Broken_Days;
             "Additional Sounds: prosoundeffects.com <br/> <br/>");
     }
     Broken_Days.showCredits = showCredits;
-    function getAnimation() {
+    function getIntroAnimation() {
         return {
-            start: { translation: Broken_Days.ƒS.positions.bottomleft, rotation: -20, scaling: new Broken_Days.ƒS.Position(0.5, 1.5), color: Broken_Days.ƒS.Color.CSS("white", 0.3) },
-            end: { translation: Broken_Days.ƒS.positions.bottomright, rotation: 20, scaling: new Broken_Days.ƒS.Position(1.5, 0.5), color: Broken_Days.ƒS.Color.CSS("red") },
+            start: { translation: Broken_Days.ƒS.positionPercent(150, 100) },
+            end: { translation: Broken_Days.ƒS.positionPercent(75, 100) },
             duration: 1,
             playmode: Broken_Days.ƒS.ANIMATION_PLAYMODE.PLAYONCE
         };
     }
-    Broken_Days.getAnimation = getAnimation;
+    Broken_Days.getIntroAnimation = getIntroAnimation;
     function getTrainAnimation() {
         return {
             start: { translation: Broken_Days.ƒS.positionPercent(75, 100) },
@@ -276,7 +276,6 @@ var Broken_Days;
             case Broken_Days.ƒ.KEYBOARD_CODE.I:
                 inventoryIsOpen = !inventoryIsOpen;
                 if (inventoryIsOpen) {
-                    //ƒS.Inventory.open();
                     await openInventory();
                     break;
                 }
@@ -1108,8 +1107,7 @@ var Broken_Days;
     async function FirstVisit() {
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Hanna scheint nicht hier zu sein...");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Blank, "...");
-        await Broken_Days.ƒS.Character.show(Broken_Days.characters.Kenzo, Broken_Days.characters.Kenzo.pose.happy, Broken_Days.ƒS.positionPercent(75, 100));
-        await Broken_Days.ƒS.update(1);
+        Broken_Days.ƒS.Character.animate(Broken_Days.characters.Kenzo, Broken_Days.characters.Kenzo.pose.happy, Broken_Days.getIntroAnimation());
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Kenzo, Broken_Days.dataForSave.nameProtagonist + "!");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Kenzo, "Man, hab' ich dich schon lange nicht mehr gesehen!");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Kenzo, "Wie geht es dir? Arbeitest du noch immer im Kamon Restaurant als Bedienung?");
@@ -1464,7 +1462,6 @@ var Broken_Days;
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Die Nachricht ist wirklich von Hanna!");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Aber was will sie mir damit nur sagen?");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Ich werde daraus nicht so wirklich schlau... Ich sollte einfach weiter suchen...");
-        // check if all puzzle pieces are collected -> restaurant scene
         Broken_Days.closeMeter();
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.onsenAmbience, 0, 1);
         if (Broken_Days.allPiecesRecieved()) {
@@ -1520,7 +1517,6 @@ var Broken_Days;
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Die Nachricht ist wirklich von Hanna!");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Aber was will sie mir damit nur sagen?");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Ich werde daraus nicht so wirklich schlau... Ich sollte einfach weiter suchen...");
-        // check if all puzzle pieces are collected -> restaurant scene
         Broken_Days.closeMeter();
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.urbanAmbience, 0, 1);
         if (Broken_Days.allPiecesRecieved()) {
@@ -1808,7 +1804,6 @@ var Broken_Days;
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Die Nachricht ist wirklich von Hanna!");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Aber was will sie mir damit nur sagen?");
         await Broken_Days.ƒS.Speech.tell(Broken_Days.characters.Protagonist, "Ich werde daraus nicht so wirklich schlau... Ich sollte einfach weiter suchen...");
-        // check if all puzzle pieces are collected -> restaurant scene
         Broken_Days.ƒS.Sound.fade(Broken_Days.sound.templeAmbience, 0, 1);
         Broken_Days.closeMeter();
         if (Broken_Days.allPiecesRecieved()) {
