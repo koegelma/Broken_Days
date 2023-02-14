@@ -116,7 +116,7 @@ var Broken_Days;
     Broken_Days.transitions = {
         puzzle: {
             duration: 1,
-            alpha: "./FreeTransitions/5.jpg",
+            alpha: "./Transitions/5.jpg",
             edge: 1
         }
     };
