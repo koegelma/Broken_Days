@@ -3,7 +3,7 @@
 [Pages-Version](https://koegelma.github.io/Broken_Days/)  
 [Designdokument](https://github.com/koegelma/Broken_Days/blob/main/Konzept.pdf)  
 [Code](https://github.com/koegelma/Broken_Days/tree/main/Source)  
-[Download as zip](https://github.com/koegelma/Broken_Days/raw/main/archive/Fudge.zip)  
+[Download as zip](https://github.com/koegelma/Broken_Days/raw/main/archive/Koegel_Marius_Broken_Days.zip)  
 
 ## Steuerung und Interaktion
 
